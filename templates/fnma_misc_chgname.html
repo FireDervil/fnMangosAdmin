@@ -12,9 +12,12 @@
 								<form method="post" action="chgname.php">
                                 <input type="hidden" name="op" value="changeName" />
 								<table border='0' cellspacing='0' cellpadding='4' width='540'>
-								<!-- TODO: here comes an other if call -->
-										<tr>
-											<td colspan='2'><center><{$smarty.const._MD_FNMA_TOOL_CHGTITLE}></center><br /></td>
+									<tr>
+											<td colspan='2'>
+                                            <h1><{$smarty.const._MD_FNMA_TOOL_CHGTITLE}></h1>
+                                            <{$smarty.const._MD_FNMA_TOOLS_RENINFO}><br /><br  />
+                                            <{$process_costs}><br /><br  />
+                                               </td>
 										</tr>
 										<tr>
 											<td align='right' valign = "top" width='30%'><b><{$smarty.const._MD_FNMA_TOOL_CHAR}></b></td>

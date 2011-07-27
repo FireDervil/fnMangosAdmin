@@ -58,6 +58,22 @@ class Char
 	}
 
 //	************************************************************
+// Re-Customize (flag = 8)
+	public function setCustomize($id)
+	{
+		$check = $this->mysql["char"]->selectCell("SELECT `at_login` FROM `characters` WHERE `guid`='".$id."'");
+		if($check & 8)
+		{
+			return FALSE;
+		}
+		else
+		{
+			$this->mysql["char"]->query("UPDATE `characters` SET `at_login`=(`at_login` + 8) WHERE `guid`='".$id."'");
+			return TRUE;
+		}
+	}
+	
+//	************************************************************
 // Checks to see if the character is online. returns TRUE if character is online
 
 	public function isOnline($guid)

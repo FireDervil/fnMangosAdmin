@@ -1,0 +1,56 @@
+<div>
+<p><a href="member.php" alt="zurück">Accountdetails</a> >> Redesign</p>
+<br />
+</div>
+<table width = "550" align='center'>
+	<tr>
+		<td>
+			<table width = "550" style = "border-width: 1px; border-style: dotted; border-color: #928058;">
+				<tr>
+					<td>
+						<table width='545'>
+						<tr>
+							<td>
+								<form method="post" action="customize.php">
+                                <input type="hidden" name="op" value="recustomize" />
+								<table border='0' cellspacing='0' cellpadding='4' width='540'>
+									<tr>
+										<td colspan='2'>
+                                        <h1><{$smarty.const._MD_FNMA_TOOLS_RECUSTOMIZE}></h1>
+                                         <{$smarty.const._MD_FNMA_TOOL_REINFO}><br /><br />
+                                         <{$lang_points_cost}>
+                                         <br /><br />
+                                        </td>
+										</tr>
+										<tr>
+											<td align='right' valign = "top" width='50%'><b><{$smarty.const._MD_FNMA_TOOL_CHAR}></b></td>
+											<td align='left' valign = "top" width='50%'>
+												<select name='id'>
+													<{if $char_list == FALSE}>
+														<option value='0'>No Characters Found!</option>
+														<{else}>
+                                                        <{foreach from=$char_list item=character}>
+															<option value='<{$character.guid}>'><{$character.name}></option>
+														<{/foreach}>
+														<{/if}>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td colspan='2' align='center'>
+												<br />
+												<input type="submit" value="<{$smarty.const._MD_FNMA_TOOL_CHANGE}>">
+											</td>
+										</tr>
+								
+								</table>
+								</form>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>

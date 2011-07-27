@@ -24,7 +24,7 @@ $fnmaUser = $fnmaAccount->getProfile($_SESSION['fnmaUserId']);
 
 // TODO: this goes in xoopsConfig
 $xoopsModuleConfig['is_active_chgname'] = 1;
-$xoopsModuleConfig['module_charrename'] = 1;
+$xoopsModuleConfig['module_charcustomize'] = 1;
 $xoopsModuleConfig['module_charrename_pts'] = 5;
 
 switch($op)
@@ -61,16 +61,16 @@ switch($op)
 						points_spent=(points_spent + ".$xoopsModuleConfig['module_charrename_pts'].")  
 					   WHERE account_id = ".$fnmaUser['id']." LIMIT 1"
 					);
-					redirect_header('chgname.php', 1, _MD_FNMA_TOOL_CHGNSUCESS);
+					redirect_header('chgname.php', 1, sprintf(_MD_FNMA_TOOL_CHGNSUCESS, $_POST['newname']));
 				}
 			} else {
 					redirect_header('chgname.php', 1, _MD_FNMA_TOOL_CHGERROR3);
 			}
 		} else {
-			redirect_header('chgname.php', 1, _MD_FNMA_TOOLS_NEXISTS);
+			redirect_header('member.php', 1, _MD_FNMA_TOOLS_NEXISTS);
 		}
 	} else{
-		redirect_header('chgname.php', 1, _MD_FNMA_TOOLS_NENOUGHP);
+		redirect_header('member.php', 1, _MD_FNMA_TOOLS_NENOUGHP);
 	}
 	
 	exit();
@@ -86,7 +86,7 @@ switch($op)
 	
 	$xoopsTpl->assign('char_list', $char_list);
 	$xoopsTpl->assign('is_active_chgname', '1');
-
+	$xoopsTpl->assign('process_costs', sprintf(_MD_FNMA_TOOL_COSTS, $xoopsModuleConfig['module_charrename_pts']));
 	break;
 		
 }

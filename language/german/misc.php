@@ -65,9 +65,26 @@ define('_MD_FNMA_TOOL_CHGTITLE', 'Char - Name ändern');
 define('_MD_FNMA_TOOL_CHAR', 'Char wählen:');
 define('_MD_FNMA_TOOL_NEWNAME', 'Neuer Name: ');
 define('_MD_FNMA_TOOL_CHANGENAME', 'Namen ändern');
-define('_MD_FNMA_TOOL_MODINCT', 'Modul ist nicht aktiv!');
+define('_MD_FNMA_TOOL_MODINCT', 'ERROR: 10901 - Modul ist nicht aktiv!');
+define('_MD_FNMA_TOOL_CHGNSUCESS',' Dein Spielername wurde Erfolgreich in %s gändert!');
+define('_MD_FNMA_TOOLS_NEXISTS', 'ERROR 10201: - Dieser name Existiert bereits');
+define('_MD_FNMA_TOOL_CHGERROR3', 'ERROR 10801 - Der Char ist noch Online!<br /> Du musst dich zu erst abmelden!');
+define('_MD_FNMA_TOOLS_NENOUGHP', 'ERROR 10101: - Du besitzt leider nicht genügend Webpoints für diese Aktion.');
+define('_MD_FNMA_TOOLS_RENINFO', 'Hier kannst Du den Namen deines Chars ändern.<br />Bitte wähle den Namen des Chars aus der Dropdown- Liste<br />dessen Namen du Ändern möchtest und trage anschließend in das Textfeld einen neuen Namen ein.');
+
+// re-customize - customize.php
+define('_MD_FNMA_TOOLS_RECUSTOMIZE', 'Char neues Aussehen spendieren');
+define('_MD_FNMA_TOOL_CHANGE', 'Flag setzen');
+define('_MD_FNMA_TOOL_REINFO', 'Wenn Du dieses Flag setzten möchtest, <br />kannst du deinem Char beim nächsten Login ein neues Aussehen spendieren!');
+define('_MD_FNMA_TOOLS_ISASET', 'ERROR: 10201 - Flag ist bereits gesetzt!');
+define('_MD_FNMA_TOOL_COSTS', 'Dieser Service wird dich <b>%d </b>deiner Webpoints kosten!');
+define('', '');
+define('', '');
+define('', '');
+
+
 /*
-define('','');
+define('', '');
 define('', '');
 */
 

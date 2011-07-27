@@ -6,7 +6,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 
 $modversion["name"] = _MI_FNMA_MANAGER_NAME;
-$modversion["version"] = '1.0.6';
+$modversion["version"] = '1.07';
 $modversion["description"] = _MI_FNMA_MANAGER_DESC;
 $modversion["image"] = "images/logo/fnMangosAdmin_logo.png";
 $modversion["dirname"] = "fnMangosAdmin";
@@ -132,6 +132,9 @@ $modversion['templates'][$i]['description'] = 'template for the voting page';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_misc_chgname.html';
 $modversion['templates'][$i]['description'] = 'template for the changename page';
+$i++;
+$modversion['templates'][$i]['file'] = 'fnma_misc_customize.html';
+$modversion['templates'][$i]['description'] = 'template for the customize page';
 $i++;
 
 // config
