@@ -1,0 +1,40 @@
+<{if isset($xoops_modulecss)}>
+   <link rel="stylesheet" type="text/css" href="<{$xoops_modulecss}>" />
+<{/if}>
+<div>
+<{$smarty.const._MD_FNMA_WELCOME_INTRO}>
+</div>
+<br /><br />
+<div class="clear"></div>
+<span class="news_header"><{$smarty.const._MD_FNMA_NEWS_HEADER}></span>
+<div id="index_stats">
+
+</div>
+<div id="news">
+<table width="100%" align='center'>
+<{foreach from=$result item=news}>
+	<tr>
+    	<td colspan="4"><span style="text-align:left"><b><{$news.news_title}></b></span> </td>
+    </tr>
+    <tr>
+    	<td colspan="4" height="5"></td>
+    </tr>
+    <tr>
+    	<td colspan="4"><{$news.news_text}></td>
+    </tr>
+    <tr>
+    	<td colspan="4" height="5"></td>
+    </tr>
+    <tr>
+      <td><{$smarty.const._MD_FNMA_NEWSAUTHOR}> <{$news.news_author}></td>
+      <td>&nbsp;</td>
+      <td><g:plusone size="medium"></g:plusone></td>
+      <td><{$smarty.const._MD_FNMA_NEWSDATE}> <{$news.news_date}></td>
+    </tr>
+    
+<{/foreach}>
+
+</table>
+
+</div>
+<br />

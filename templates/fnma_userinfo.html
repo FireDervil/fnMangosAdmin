@@ -1,0 +1,110 @@
+<{include file="db:fnma_header.html"}>
+<{if $user_ownpage == true}>
+<form name="usernav" action="user.php" method="post">
+<br /><br />
+<table class="width70 aligncenter bnone">
+  <tr class="txtcenter">
+    <td>
+    <input type="button" value="<{$lang_home}>" onclick="location='member.php'" />
+    <input type="button" value="<{$lang_editprofile}>" onclick="location='edituser.php'" />
+
+    <{if $user_candelete == true}>
+    <input type="button" value="<{$lang_deleteaccount}>" onclick="location='user.php?op=delete'" />
+    <{/if}>
+
+    <input type="button" value="<{$lang_logout}>" onclick="location='user.php?op=logout'" /></td>
+  </tr>
+</table>
+</form>
+<br /><br />
+<{elseif $xoops_isadmin != false}>
+<br /><br />
+<table class="width70 aligncenter bnone">
+  <tr class="txtcenter">
+    <td><input type="button" value="<{$lang_editprofile}>" onclick="location='<{$xoops_url}>/modules/system/admin.php?fct=users&amp;uid=<{$user_uid}>&amp;op=modifyUser'" />
+    <input type="button" value="<{$lang_deleteaccount}>" onclick="location='<{$xoops_url}>/modules/system/admin.php?fct=users&amp;op=delUser&amp;uid=<{$user_uid}>'" />
+  </tr>
+</table>
+<br /><br />
+<{/if}>
+
+<table class="width100 bnone" cellspacing="5">
+  <tr class="aligntop">
+    <td class="width50">
+      <table class="outer width100" cellpadding="4" cellspacing="1">
+        <tr>
+          <th colspan="2" class="txtcenter"><{$lang_allaboutuser}></th>
+        </tr>
+        <tr class="aligntop">
+          <td class="head"><{$lang_avatar}></td>
+          <td class="even txt center"><img src="<{$user_avatarurl}>" alt="Avatar" /></td>
+        </tr>
+        <tr>
+          <td class="head"><{$lang_name}></td>
+          <td class="odd center"><{$user_name}></td>
+        </tr>
+        <tr>
+          <td class="head"><{$lang_expension}></td>
+          <td class="even"><{$user_expansion}></td>
+        </tr>
+        <tr class="aligntop">
+          <td class="head"><{$lang_email}></td>
+          <td class="odd"><{$user_email}></td>
+        </tr>
+        <tr class="aligntop">
+          <td class="head"><{$lang_on_realm}></td>
+          <td class="even"><{$user_on_realm}></td>
+        </tr>
+        <tr class="aligntop">
+          <td class="head"><{$lang_locale}></td>
+          <td class="odd"><{$user_locale}></td>
+        </tr>
+        <tr class="aligntop">
+          <td class="head"><{$lang_extrainfo}></td>
+          <td class="even"><{$user_extrainfo}></td>
+        </tr>
+      </table>
+    </td>
+    <td class="width50">
+      <table class="outer width100" cellpadding="4" cellspacing="1">
+        <tr class="aligntop">
+          <th class="txtcenter" colspan="2"><{$lang_statistics}></th>
+        </tr>
+        <tr class="aligntop">
+          <td class="head"><{$lang_membersince}></td>
+          <td class="even txtcenter"><{$user_joindate}></td>
+        </tr>
+        <tr class="aligntop">
+          <td class="head"><{$lang_rank}></td>
+          <td class="odd txtcenter"><{$user_rankimage}><br /><{$user_ranktitle}></td>
+        </tr>
+        <tr class="aligntop">
+          <td class="head"><{$lang_user_rank_level}></td>
+          <td class="even txtcenter"><{$user_rank_level}></td>
+        </tr>
+    <tr class="aligntop">
+          <td class="head"><{$lang_lastlogin}></td>
+          <td class="odd center"><{$user_lastlogin}></td>
+        </tr>
+      </table>
+      <br />
+      <table class="outer width100" cellpadding="4" cellspacing="1">
+        <tr class="aligntop">
+          <th colspan="2" class="txtcenter"><{$lang_signature}></th>
+        </tr>
+        <tr class="aligntop">
+          <td class="even"><{$user_signature}></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+
+<!-- start module search results loop -->
+<{foreach item=module from=$modules}>
+
+<br class="clear" />
+<h4><{$module.name}></h4>
+<{$module.showall_link}>
+<{/foreach}>
+<!-- end module search results loop -->

@@ -1,0 +1,36 @@
+<fieldset class="pad10">
+<table cellpadding='3' cellspacing='0' width='100%'>
+    <tbody>
+		<tr> 
+			<td class="rankingHeader" align='left' colspan='6'><{$smarty.const._MD_FNMA_PAGES}><{$pages_str}></td>
+		</tr>
+		<tr> 
+			<td class="rankingHeader" align="center" colspan='6' nowrap="nowrap"><{$smarty.const._MD_FNMA_REALMS}> <{$realm_info_new.name}></td>          
+		</tr>
+		<tr>
+			<td class="rankingHeader" align="center" nowrap="nowrap">#</td>
+			<td class="rankingHeader" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_NAME}>&nbsp;</td>
+			<td class="rankingHeader" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_RACE}>&nbsp;</td>
+			<td class="rankingHeader" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_CLASS}>&nbsp;</td>
+			<td class="rankingHeader" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_LEVEL}>&nbsp;</td>
+			<td class="rankingHeader" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_LOCATION}>&nbsp;</td>
+		</tr>
+  <{foreach from=$data item=item}>
+		<tr>
+				<td class="serverStatus<{$item.res_color}>" align="center"><b style="color: rgb(102, 13, 2);"><{$item.number}></b></td>
+				<td class="serverStatus<{$item.res_color}>"><b style="color: rgb(35, 67, 3);"><center><{$item.name}></center></b></td>
+				<td class="serverStatus<{$item.res_color}>" align="center"><small style="color: rgb(102, 13, 2);">
+					<img onmouseover="ddrivetip('<{$item.charClassInfoN}>','#ffffff')" onmouseout="hideddrivetip()"
+					src="images/icons/race/<{$item.race}>-<{$item.gender}>.gif" height="18" width="18" alt=""/></small>
+				</td>
+				<td class="serverStatus<{$item.res_color}>" align="center"><small style="color: (35, 67, 3);">
+					<img onmouseover="ddrivetip('<{$item.charClassInfoC}>','#ffffff')" onmouseout="hideddrivetip()"
+					src="images/icons/class/<{$item.class}>.gif" height="18" width="18" alt=""/></small>
+				</td>
+				<td class="serverStatus<{$item.res_color}>" align="center"><b style="color: rgb(102, 13, 2);"><{$item.level}></b></td>
+				<td class="serverStatus<{$item.res_color}>" align="center"><b style="color: rgb(35, 67, 3);"><{$item.pos}></b></td>
+			</tr>
+<{/foreach}>            
+    </tbody>
+    </table>
+</fieldset>    

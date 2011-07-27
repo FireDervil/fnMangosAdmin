@@ -1,0 +1,35 @@
+<fieldset class="pad10">
+  <legend class="bold"><{$lang_register}></legend>
+  <form action="register.php" method="post">
+  
+    <{$lang_username}> <input type="text" name="r_login" size="26" maxlength="25" value="<{$usercookie}>" /><br /><br />
+    <{$lang_password}> <input type="password" name="r_pass" size="21" maxlength="32" /><br /><br />
+    <{$lang_password_confirm}> <input type="password" name="r_cpass" size="21" maxlength="32" /><br /><br />
+    <{$lang_email}> <input type="text" name="r_email" size="26" maxlength="25" /><br /><br />
+    <{$lang_account_type}>  <select id="r_account_type" name="r_account_type">
+					<option selected="selected" value="2"><{$lang_wotlk}></option>
+					<option value="1"><{$lang_tbc}></option>
+					<option value="0"><{$lang_classic}></option>
+				</select><br /><br />
+                <input type="hidden" name="filename_image" value="<{$captcha_filename}>"/>
+					<b><{$lang_captcha_info}></b>
+					<br />
+					<input type="text" name="image_key"/><br /><br />
+    <{$lang_reg_secret}> <input type="text" name="r_secret" size="15" maxlength="8" /><br /><br />
+    
+    <input type="hidden" name="op" value="register" />
+    <input type="hidden" name="xoops_redirect" value="<{$redirect_page}>" />
+    <input type="submit" value="<{$lang_register}>" />
+  </form>
+  <br />
+
+</fieldset>
+
+<br />
+
+<fieldset class="pad10">
+  <legend class="bold"><{$lang_have_account}></legend>
+  <div><br /><{$lang_noproblem}></div>
+    <a name="user.php"></a>
+  <div><{$lang_notregister}><br /></div>
+</fieldset>

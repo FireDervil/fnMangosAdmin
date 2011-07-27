@@ -1,0 +1,87 @@
+    <table width="100%" cellpadding="3" cellspacing="0">
+    <tbody>
+        <tr>
+            <td class="rankingHeader" colspan="3" align="center" nowrap="nowrap"><{$lang_vote_acct_details}></td>
+        </tr>
+
+		<tr>
+            <td class="rankingHeader" align="center" nowrap="nowrap"><{$lang_vote_curacct}></td>
+            <td class="rankingHeader" align="center" nowrap="nowrap"><{$lang_vote_count}></td> 
+            <td class="rankingHeader" align="center" nowrap="nowrap"><{$lang_vote_points}></td> 
+        </tr>
+
+        <tr>
+            <td class="serverStatus1" align="center" nowrap="nowrap"><{$user.username}></td>
+            <td class="serverStatus1" align="center" nowrap="nowrap"><{$user.total_votes}></td>
+            <td class="serverStatus1" align="left" nowrap="nowrap"><{$lang_vote_balance}> <{$user.web_points}>
+				<br /><{$lang_vote_acct_points_today}> <{$user.points_today}></td>
+        </tr>
+        <tr>
+            <td colspan="3" align="left"><br><b><center><{$lang_vote_keep}></center></b>
+                <ul>
+                    <li>
+						<{$lang_vote_info}> 
+					</li>			  
+                    <li>
+						<span style="color: red; font-weight: bold;"><{$lang_vote_hack}></span><br><br>
+                    </li>
+				</ul>
+            </td>
+        </tr> 
+    </table>
+    <br />
+<br />
+<center>
+
+<table cellpadding='3' cellspacing='0' width='100%'>
+    <tbody>
+		<tr> 
+			<td class="rankingHeader" align="center" colspan='6' nowrap="nowrap"><{$lang_choose_vote}></td>          
+		</tr>
+		<tr>
+			<td class="rankingHeader" align="center" nowrap="nowrap"><{$lang_voting_sites}>&nbsp;</td>
+			<td class="rankingHeader" align="center" nowrap="nowrap"><{$lang_voted}>&nbsp;</td>
+			<td class="rankingHeader" align="center" nowrap="nowrap"><{$lang_resets}>&nbsp;</td>
+			<td class="rankingHeader" align="center" nowrap="nowrap"><{$lang_points}>&nbsp;</td>
+			<td class="rankingHeader" align="center" nowrap="nowrap"><{$lang_choose}>&nbsp;</td>
+		</tr>
+        <{foreach from=$vote_sites  item=value}>
+        
+        	<form action="voting.php" method="post" target="_blank">
+            	<input type="hidden" name="op" value="vote" />
+				<input type="hidden" name="site" value="<{$value.id}>" />
+        	<tr>
+					<td class="serverStatus1" align="center" width="30%">
+						<img src="<{$value.image_url}>" border="0" alt="<{$value.hostname}>" />
+					</td>
+       				 <td class="serverStatus1" align="center">
+						<{if $voted == 1}>
+                        <center>
+                        <b style="color: rgb(102, 13, 2);"><{$lang_yes}></b>
+                        </center>
+						<{else}>
+							<center>
+                            <b style="color: rgb(35, 67, 3);"><{$lang_no}></b>
+                            </center>
+						<{/if}>
+			</td>
+					<td class="serverStatus1" align="center"><{$reset}></td>
+					<td class="serverStatus1" align="center">
+						<center><{$value.points}></center>
+					</td>
+					<td class="serverStatus1" align="center">
+						<center>
+                        <{if $voted == 1}>
+                        <b><{$lang_allry_voted}></b>
+                        <{else}>
+                        <input  type="submit" name="submit"  value="<{$lang_vote}>" />
+                        <{/if}>
+                        </center>
+					</td>
+				</tr>
+				</form>
+		<{/foreach}>
+       </tbody>
+	</table> 
+  </center>      
+        

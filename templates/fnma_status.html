@@ -1,0 +1,25 @@
+<{include file="db:fnma_header.html"}>
+<fieldset class="pad10">
+<table cellpadding="3" cellspacing="0" width="100%">
+  <tbody>
+    <tr>
+      <td class="rankingHeader" align="left" nowrap="nowrap" width="53"><center><{$lang_status}></center></td>
+      <td align="left" nowrap="nowrap" class="rankingHeader"><center><{$lang_uptime}></center></td>
+      <td align="left" nowrap="nowrap" class="rankingHeader"><{$lang_realm_name}></td>
+      <td class="rankingHeader" align="center" nowrap="nowrap" width="120"> <{$lang_realm_type}></td>
+      <td class="rankingHeader" align="center" nowrap="nowrap" width="120"> <{$lang_auslastung}></td>
+    </tr>
+    <tr>
+      <td colspan="6" style="background: url('images/backgrounds/shadow.gif');"><img src="images/pixel.gif" height="1" width="1" alt=""/></td>
+    </tr>
+    <tr>
+      <td class="serverStatus<{$res_color}>" align="center"><b><{$status}></b></td>
+      <td width="168" class="serverStatus<{$res_color}>"><center><{$uptime}></center></td>
+      <td width="802" class="serverStatus<{$res_color}>"><b style='color: rgb(35, 67, 3);'><{$name}></b></td>
+      <td class="serverStatus<{$res_color}>" align="center"><b style='color: rgb(102, 13, 2);'><{$type}></b></td>
+      <td class="serverStatus<{$res_color}>" align="center"><b style='color: rgb(35, 67, 3);'><{$population}></b></td>
+    </tr>
+
+  </tbody>
+</table>
+</fieldset>

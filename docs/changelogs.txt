@@ -1,0 +1,23 @@
+=>version 1.0.6 (FireDervil)
+--------------------
+- Neue Funktionen hinzugefügt; Die vorhandenen wurden ersetzten / optimieren
+- Neue Methoden der Klassen für Account & Chars hinzugefügt / erweitert
+- Neue Template Dateien angelegt
+- Sprachdateien verändert / hinzugefügt
+- lostpass Funktionen mit mailer über den XoopsMailer hinzugefügt
+- im Memberbereich neue Inhalte hinzugefügt
+
+
+=>version 1.0.5 (FireDervil)
+--------------------
+- Neue Funktionen hinzugefügt um die vorhandenen zu ersetzten / zu optimieren
+- Neue Classen für Account & Chars hinzugefügt
+- Neue Template Dateien angelegt
+- Sprachdateien verändert / hinzugefügt
+- lostpass funktionen mit mailer über den XoopsMailer hinzugefügt
+
+
+
+=>version 1.0 (FNMA Team)
+--------------------
+Original version

@@ -1,0 +1,72 @@
+				<!-- Main Content --> 
+					<span class="lite">
+						
+							<h1><b><{$smarty.const._MD_FNMA_HONOR_RANKING}></b></h1><br/>
+							<p><{$lang_each_fighter_faction}></p>
+						<br />
+					</span>
+					<table border="0" cellpadding="5" cellspacing="0" width="100%" align="center">
+					<tr>
+						<td align="left" width="50%" valign="top"><img src="images/banners/alliance2.png">
+                        <br /><br />
+                        <div>
+								<table border="0" cellpadding="2" cellspacing="0" width="100%" align="center">
+									<tr bgcolor="#CCCCCC">
+										<td align="right" width="10"><b>#</b></td>
+										<td width="20"><b><{$smarty.const._MD_FNMA_RANK}></b></td>
+										<td width="20"><b><{$smarty.const._MD_FNMA_RACE}></b></td>
+										<td width="20"><b><{$smarty.const._MD_FNMA_CLASS}></b></td>
+										<td><b><{$smarty.const._MD_FNMA_NAME}></b></td>
+										<td align="center"><b><{$smarty.const._MD_FNMA_LEVEL}></b></td>
+										<td align="center"><b><{$smarty.const._MD_FNMA_KILLS}></b></td>
+									</tr>
+									<{foreach from=$allykiller item=item}>
+											<tr bgcolor="<{cycle values="#eeeeee,#dddddd"}>">
+												<td align="right" width="20" style="font-size:14px;"><b><{$pos}></b></td>
+												<td width="20" align="center"><img src="<{$item.rank_icon}>" onmouseover="ddrivetip('<{$item.rank}>','#ffffff')"; onmouseout="hideddrivetip()"></td>
+												<td width="20" align="center"><img src="<{$item.race_icon}>" onmouseover="ddrivetip('<{$item.race}>','#ffffff')"; onmouseout="hideddrivetip()"></td>
+												<td width="20" align="center"><img src="<{$item.class_icon}>" onmouseover="ddrivetip('<{$item.class}>','#ffffff')"; onmouseout="hideddrivetip()"></td>
+												<td style="font-size:14px;"><b><{$item.name}></b></td>
+												<td width="20" align="center" style="font-size:12px;"><b><{$item.level}></b></td>
+												<td align="center" style="font-size:12px;"><font color="red"><b><{$item.honorable_kills}></b></font></td>
+											</tr>
+									<{/foreach}>
+								</table>
+							</div>
+							<br /><br />
+						</td>
+                        </tr>
+                        </table>
+                        
+                        <table border="0" cellpadding="5" cellspacing="0" width="100%" align="center">
+					<tr>
+						<td align="left" valign="top"><img src="images/banners/horde2.png">
+							<br /><br /><div>
+								<table border="0" cellpadding="2" cellspacing="0" width="100%" align="center">
+									<tr  bgcolor="#CCCCCC">
+										<td align="right" width="20"><b>#</b></td>
+										<td width="20"><b><{$smarty.const._MD_FNMA_RANK}></b></td>
+										<td width="20"><b><{$smarty.const._MD_FNMA_RACE}></b></td>
+										<td width="20"><b><{$smarty.const._MD_FNMA_CLASS}></b></td>
+										<td><b><{$smarty.const._MD_FNMA_NAME}></b></td>
+										<td align="center"><b><{$smarty.const._MD_FNMA_LEVEL}></b></td>
+										<td align="center"><b><{$smarty.const._MD_FNMA_KILLS}></b></td>
+									</tr>
+									<{foreach from=$hordekiller item=item}>
+                                  			<tr bgcolor="<{cycle values="#eeeeee,#dddddd"}>">
+												<td align="right" width="20" style="font-size:14px;"><b><{$pos}></b></td>
+												<td width="20" align="center"><img src="<{$item.rank_icon}>" onmouseover="ddrivetip('<{$item.rank}>','#ffffff')"; onmouseout="hideddrivetip()"></td>
+												<td width="20" align="center"><img src="<{$item.race_icon}>" onmouseover="ddrivetip('<{$item.race}>','#ffffff')"; onmouseout="hideddrivetip()"></td>
+												<td width="20" align="center"><img src="<{$item.class_icon}>" onmouseover="ddrivetip('<{$item.class}>','#ffffff')"; onmouseout="hideddrivetip()"></td>
+												<td style="font-size:14px;"><b><{$item.name}></b></td>
+												<td width="20" align="center" style="font-size:12px;"><b><{$item.level}></b></td>
+												<td align="center" style="font-size:12px;"><font color="red"><b><{$item.honorable_kills}></b></font></td>
+											</tr>
+                                         
+										<{/foreach}>
+								</table>
+							</div>
+							<br/>
+						</td>
+					</tr>
+					</table>

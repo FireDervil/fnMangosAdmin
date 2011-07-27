@@ -1,0 +1,44 @@
+<fieldset class="pad10">
+ <table cellpadding="3" cellspacing="0" width='100%'>
+    <tbody>
+        <tr>
+            <td class="rankingHeader" align="center" colspan="6" nowrap="nowrap"><{$smarty.const._MD_FNMA_REALMS}> <{$result.name}></td>
+        </tr>
+	<{if $noplayer == '1'}>
+      		<tr> 
+				<td class="rankingHeader" align='center' colspan='6' nowrap="nowrap"><{$smarty.const._MD_FNMA_NO_PLAYERS_ONLINE}></td>
+            </tr>
+            <tr>
+                <td class="rankingHeader" align='center' colspan='6'><a href="index.php"><{$smarty.const._MD_FNMA_BACK}></a></td>
+			</tr>  
+	<{else}>
+    <{if $numofpgs > 1}> 
+			<tr> 
+				<td class="rankingHeader" align='left' colspan='6'><{$smarty.const._MD_FNMA_PAGES}> <{$pages_str}></td>
+			</tr>
+		<{/if}>
+        <tr>
+            <td class="rankingHeader" align="center" nowrap="nowrap">#</td>
+            <td class="rankingHeader" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_NAME}>&nbsp;</td> 
+            <td class="rankingHeader" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_RACE}>&nbsp;</td>
+            <td class="rankingHeader" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_CLASS}>&nbsp;</td>
+            <td class="rankingHeader" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_LEVEL}>&nbsp;</td>
+            <td class="rankingHeader" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_LOCATION}>&nbsp;</td>
+        </tr>
+
+		<{foreach from=$res_info item=res}>
+        <tr>
+            <td class="serverStatus<{$res.res_color}>" align="center"><b style="color: rgb(102, 13, 2);"><{$res.number}></b></td>
+            <td class="serverStatus<{$res.res_color}>" align="center"><b style="color: rgb(35, 67, 3);"><{$res.name}></b></a></td>
+            <td class="serverStatus<{$res.res_color}>" align="center"><small style="color: rgb(102, 13, 2);">
+				<img onmouseover="ddrivetip('<{$res_race}>','#ffffff')" onmouseout="hideddrivetip()" src="images/icons/race/<{$res.race}>-<{$res.gender}>.gif" height="18" width="18"></small></td>
+            <td class="serverStatus<{$res.res_color}>" align="center"><small style="color: (35, 67, 3);">
+				<img onmouseover="ddrivetip('<{$res_class}>','#ffffff')" onmouseout="hideddrivetip()" src="images/icons/class/<{$res.class}>.gif" height="18" width="18"></small></td>
+            <td class="serverStatus<{$res.res_color}>" align="center"><b style="color: rgb(102, 13, 2);"><{$res.level}></b></td>
+            <td class="serverStatus<{$res.res_color}>" align="center"><b style="color: rgb(35, 67, 3);"><{$res.pos}></b></td>
+        </tr>
+        <{/foreach}>
+            <{/if}>
+    </tbody>
+    </table>
+    </fieldset>

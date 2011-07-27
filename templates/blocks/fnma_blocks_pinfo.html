@@ -1,0 +1,22 @@
+<{if $block.error == 1}>
+<{$smarty.const._MB_FNMA_NO_DATA_IN_CONFIG}> <{$block.errormsg}><br>
+<{else}>
+<{if $block.show_max_online == 1}>
+<{$smarty.const._MB_FNMA_MAX_PLAYER_ONLINE}> <{$block.maxonline}><br />
+<{/if}>
+
+<{$smarty.const._MB_FNMA_PLAYER_ONLINE}> <{$block.online}><br />
+
+<{if $block.show_uptime == 1}>
+<{$smarty.const._MB_FNMA_SERVER_UPTIME}><br />
+ <{$block.uptime}><br />
+<{/if}>
+<{$smarty.const._MB_FNMA_MAX_PLAYERS_COUNT}><br />
+<{$smarty.const._MB_FNMA_MAX_PLAYERS_ALLOWED}><br />
+<{$smarty.const._MB_FNMA_MAX_PLAYERS_START_GOLD}><br />
+<br />
+<{$smarty.const._MB_FNMA_MAX_RATE_XP_KILL}><br />
+<{$smarty.const._MB_FNMA_MAX_RATE_XP_QUEST}><br />
+<{$smarty.const._MB_FNMA_MAX_RATE_XP_EXPLORE}><br />
+<{$smarty.const._MB_FNMA_MAX_RATE_DROP_MONEY}><br />
+<{/if}>
