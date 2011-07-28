@@ -24,6 +24,9 @@ $modversion['min_php'] = '5.2';
 $modversion['min_xoops'] = '2.5';
 $modversion['system_menu'] = 1;
 
+include_once(XOOPS_ROOT_PATH."/Frameworks/art/functions.ini.php");
+// Is performing module install/update?
+$isModuleAction = mod_isModuleAction($modversion['dirname']);
 
 // Sql file 
 $i=0;
@@ -48,8 +51,13 @@ $i++;
 $modversion['tables'][$i] = "fnma_news";
 $i++;
 
+//install
+$modversion['onInstall'] = 'include/module.php';
 
-//$modversion["onUpdate"] = "include/update.php";// Menu
+//update things
+$modversion['onUpdate'] = 'include/module.php';
+
+
 $i=0;
 $modversion["hasMain"] = 1;
 if(isset($_SESSION['fnmaUserId'])){
@@ -89,7 +97,6 @@ $modversion["adminmenu"] = "admin/menu.php";
 $modversion["hasSearch"] = 0;
 $modversion["search"]["file"] = "include/search.inc.php";
 $modversion["search"]["func"] = "";
-
 
 
 // Templates

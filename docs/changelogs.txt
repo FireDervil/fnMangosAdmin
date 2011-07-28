@@ -9,6 +9,17 @@
 - Sprachdateien verändert und oder neues angefügt
 - angefangen den Memberbereich zu überarbeiten!
 
+=>version 1.07 (FireDervil)
+--------------------
+- Revisionsnummer geändert (entsprechend der XoopsModul Developer rights)
+- Memberbereich mit "re-design" des Chars; "Namen Änderung", sowie dem "Voting" ausgestattet
+- Neue Funktionen hinzugefügt; Die vorhandenen Funktionen wurden ersetzt und oder optimiert
+- Neue Methoden der Klassen für Account & Chars hinzugefügt und oder diese erweitert
+- Neue Template Dateien angelegt
+- neue GLOBALE hinzugefühgt (müssen noch in die Config)
+- Sprachdateien verändert und oder neues angefügt
+- angefangen den Memberbereich zu überarbeiten!
+
 =>version 1.0.6 (FireDervil)
 --------------------
 - Neue Funktionen hinzugefügt; Die vorhandenen wurden ersetzten / optimieren
