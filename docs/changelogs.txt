@@ -1,13 +1,24 @@
-=>version 1.07 (FireDervil)
+=>version 1.09 (FireDervil)
 --------------------
-- Revisionsnummer geändert (entsprechend der XoopsModul Developer rights)
-- Memberbereich mit "re-design" des Chars; "Namen Änderung", sowie dem "Voting" ausgestattet
-- Neue Funktionen hinzugefügt; Die vorhandenen Funktionen wurden ersetzt und oder optimiert
-- Neue Methoden der Klassen für Account & Chars hinzugefügt und oder diese erweitert
+- BUG: behoben der die OnInstall / OnUpdate Funktion nicht ausführte
+- BUG: die News für den Realm werden nun korreckt angezeigt
+- BUG: wärend des Modulupdates trat ein SQL Fehler auf, der das Update verhinderte
+- NEW: neue Datenbank für Realmnews angelegt
+- MOD: template der news auf das neue DB Layout angepasst
+- TODO: es kommt noch einiges an Änderungen in den kommenden Updates
+
+
+=>version 1.08 (FireDervil)
+--------------------
+- Funktionen für onInstall / onUpdate bereit gestellt
+- PreInstallations Inhalte sind nun vorhanden (z.B. Newseintrag, Gruppen)
+- Wärend des 1. Updates werden automatisch alle account.ids in die tabelle extend kopiert
+- Neue Funktionen hinzugefügt, die wärend der installation / Update aufgaben ausfüren
 - Neue Template Dateien angelegt
 - neue GLOBALE hinzugefühgt (müssen noch in die Config)
 - Sprachdateien verändert und oder neues angefügt
-- angefangen den Memberbereich zu überarbeiten!
+- kleinere Fixes
+- viele weitere Kosmetische Änderungen
 
 =>version 1.07 (FireDervil)
 --------------------

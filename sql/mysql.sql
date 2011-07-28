@@ -85,12 +85,10 @@ CREATE TABLE `fnma_online` (
 ) ENGINE=MyISAM AUTO_INCREMENT=826 DEFAULT CHARSET=utf8;
 
 CREATE TABLE `fnma_news` (
-  `news_id` int(11) NOT NULL AUTO_INCREMENT,
-  `news_title` varchar(255) NOT NULL,
-  `news_text` tinytext NOT NULL,
-  `news_date` datetime DEFAULT NULL,
-  `news_author` int(3) NOT NULL,
-  `news_modifiy` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `news_sort_order` int(3) DEFAULT NULL,
-  PRIMARY KEY (`news_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+  `id` smallint(3) NOT NULL AUTO_INCREMENT,
+  `title` text,
+  `message` longtext,
+  `posted_by` text,
+  `post_time` int(15) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;

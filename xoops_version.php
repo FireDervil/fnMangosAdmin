@@ -6,7 +6,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 
 $modversion["name"] = _MI_FNMA_MANAGER_NAME;
-$modversion["version"] = '1.08';
+$modversion["version"] = '1.09';
 $modversion["description"] = _MI_FNMA_MANAGER_DESC;
 $modversion["image"] = "images/logo/fnMangosAdmin_logo.png";
 $modversion["dirname"] = "fnMangosAdmin";
@@ -17,7 +17,7 @@ $modversion['author'] = 'Stefan Stroth' ;
 $modversion['pseudo'] = 'FireDervil';
 $modversion['website'] = 'www.firenetworks.de';
 $modversion['name_website'] = 'FireNetworks.de';
-$modversion['status_version'] = 'ALPHA';
+$modversion['status_version'] = 'BETA';
 $modversion['release_date'] = '2011/11/21';
 $modversion['help'] = 'help.html';
 $modversion['min_php'] = '5.2';

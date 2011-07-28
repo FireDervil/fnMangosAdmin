@@ -14,22 +14,22 @@
 <table width="100%" align='center'>
 <{foreach from=$result item=news}>
 	<tr>
-    	<td colspan="4"><span style="text-align:left"><b><{$news.news_title}></b></span> </td>
+    	<td colspan="4"><span style="text-align:left"><b><{$news.title}></b></span> </td>
     </tr>
     <tr>
     	<td colspan="4" height="5"></td>
     </tr>
     <tr>
-    	<td colspan="4"><{$news.news_text}></td>
+    	<td colspan="4"><{$news.message}></td>
     </tr>
     <tr>
     	<td colspan="4" height="5"></td>
     </tr>
     <tr>
-      <td><{$smarty.const._MD_FNMA_NEWSAUTHOR}> <{$news.news_author}></td>
+      <td><{$smarty.const._MD_FNMA_NEWSAUTHOR}> <{$news.posted_by}></td>
       <td>&nbsp;</td>
       <td><g:plusone size="medium"></g:plusone></td>
-      <td><{$smarty.const._MD_FNMA_NEWSDATE}> <{$news.news_date}></td>
+      <td><{$smarty.const._MD_FNMA_NEWSDATE}> <{$news.post_time}></td>
     </tr>
     
 <{/foreach}>
