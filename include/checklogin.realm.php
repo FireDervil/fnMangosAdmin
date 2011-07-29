@@ -24,7 +24,7 @@ $fnmaUser['id'] = $fnmaAccount->getId($username);
 
 
 if (false != $login) {
-    if (0 == $fnmaAccount->getGmLevel($fnmaUser['id'])) {
+    if (5 <= $fnmaAccount->getGmLevel($fnmaUser['id'])) {
         redirect_header(XOOPS_URL.'/index.php', 5, _US_NOACTTPADM);
         exit();
     }
@@ -81,9 +81,9 @@ if (false != $login) {
     }
     redirect_header($url, 1, sprintf(_MD_FNMA_LOGGINGU, $fnmaAccount->getUsername($fnmaUser['id'])), false);
 } else if (empty($_POST['xoops_redirect'])) {
-    redirect_header(XOOPS_URL . '/modules/fnMangosAdmin/user.php', 5, $xoopsAuth->getHtmlErrors());
+    redirect_header(XOOPS_URL . '/modules/fnMangosAdmin/user.php', 5, $fnmaAccount->getHtmlErrors());
 } else {
-    redirect_header(XOOPS_URL . '/modules/fnMangosAdmin/user.php?xoops_redirect=' . urlencode(trim($_POST['xoops_redirect'])), 5, $xoopsAuth->getHtmlErrors(), false);
+    redirect_header(XOOPS_URL . '/modules/fnMangosAdmin/user.php?xoops_redirect=' . urlencode(trim($_POST['xoops_redirect'])), 5, $fnmaAccount->getHtmlErrors(), false);
 }
 exit();
 ?>

@@ -104,3 +104,10 @@ CREATE TABLE `fnma_shop_items` (
   `realms` int(100) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+CREATE TABLE `fnma_acc_captcha` (
+  `id` int(11) NOT NULL auto_increment,
+  `filename` varchar(200) NOT NULL default '',
+  `key` varchar(200) NOT NULL default '',
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

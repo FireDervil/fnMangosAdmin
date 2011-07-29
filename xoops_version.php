@@ -6,7 +6,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 
 $modversion["name"] = _MI_FNMA_MANAGER_NAME;
-$modversion["version"] = '1.11';
+$modversion["version"] = '1.12';
 $modversion["description"] = _MI_FNMA_MANAGER_DESC;
 $modversion["image"] = "images/logo/fnMangosAdmin_logo.png";
 $modversion["dirname"] = "fnMangosAdmin";
@@ -52,6 +52,9 @@ $modversion['tables'][$i] = "fnma_news";
 $i++;
 $modversion['tables'][$i] = "fnma_shop_items";
 $i++;
+$modversion['tables'][$i] = "fnma_acc_captcha";
+$i++;
+
 
 //install
 $modversion['onInstall'] = 'include/module.php';

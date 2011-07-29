@@ -1,82 +1,170 @@
 <?php
 
-/*
-* File: CaptchaSecurityImages.php
-* Author: Simon Jarvis
-* Copyright: 2006 Simon Jarvis
-* Date: 03/08/06
-* Updated: 07/02/07
-* Requirements: PHP 4/5 with GD and FreeType libraries
-* Link: http://www.white-hat-web-design.co.uk/articles/php-captcha.php
-*
-* This program is free software; you can redistribute it and/or
-* modify it under the terms of the GNU General Public License
-* as published by the Free Software Foundation; either version 2
-* of the License, or (at your option) any later version.
-*
-* This program is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
-* GNU General Public License for more details:
-* http://www.gnu.org/licenses/gpl.html
-*/
-
-class CaptchaSecurityImages
+class Captcha
 {
-  var $font = 'monofont.ttf';
+	var $tmpfolder = "cache/"; //writeable by php
+	var $ttf_folder="extras/ttf/";
 
-  function generateCode($characters)
-  {
-    /* list all possible characters, similar looking characters and vowels have been removed */
-    $possible = '23456789bcdfghjkmnpqrstvwxyz';
-    $code = '';
+	var $chars_image_activate = 6;
+	var $lx = 230;
+	var $ly = 70;
+	var $minsize = 23;
+	var $maxsize = 30;
+	var $noise = 0;  //number of chars in background
+	var $maxrotation = 20;
+	var $ttf_range = array();
+	var $privkey;
+	var $filename;
+	var $maxold = 1800;  // 0.5 h = 1800 s
 
-    for($i=0; $i<$characters; ++$i)
-    {
-      $code .= substr($possible, mt_rand(0, strlen($possible)-1), 1);
-    }
-    return $code;
-  }
+	function delold()
+	{	
+		global $fnmaDB, $xoopsDB;
+		$handle = opendir($this->tmpfolder);
+		while($file = readdir($handle))
+		{
+			if($file != "." && $file != ".." && $file != ".svn" && $file != "_svn")
+			{
+				if( filemtime($this->tmpfolder.$file) <= time() - $this->maxold )
+				{
+					@unlink($this->tmpfolder.$file);
+					$qry = "DELETE FROM ".$xoopsDB->prefix('fnma_acc_captcha')." WHERE filename='".$this->tmpfolder.$file."'";
+					$fnmaDB["sys"]->query($qry);
+				}
+			}
+		}
+		closedir($handle);
+	}
 
-  function CaptchaSecurityImages($width='350', $height='130', $characters='6')
-  {
-    $code = $this->generateCode($characters);
-    /* font size will be 75% of the image height */
-    $font_size = $height * 0.75;
-    $image = @imagecreate($width, $height) or die('Cannot initialize new GD image stream');
-    /* set the colours */
-    $background_color = imagecolorallocate($image, 20, 20, 20);
-    $text_color  = imagecolorallocate($image, 215, 235, 255);
-    $noise_color = imagecolorallocate($image, 155, 175, 195);
-    /* generate random dots in background */
-    for($i=0; $i<($width*$height)/3; ++$i)
-    {
-      imagefilledellipse($image, mt_rand(0,$width), mt_rand(0,$height), 1, 1, $noise_color);
-    }
-    /* generate random lines in background */
-    for($i=0; $i<($width*$height)/150; ++$i)
-    {
-      imageline($image, mt_rand(0,$width), mt_rand(0,$height), mt_rand(0,$width), mt_rand(0,$height), $noise_color);
-    }
-    /* create textbox and add text */
-    $textbox = imagettfbbox($font_size, 0, $this->font, $code) or die('Error in imagettfbbox function');
-    $x = ($width  - $textbox[4])/2;
-    $y = ($height - $textbox[5])/2;
-    imagettftext($image, $font_size, 0, $x, $y, $text_color, $this->font , $code) or die('Error in imagettftext function');
-    /* output captcha image to browser */
-    header('Content-Type: image/jpeg');
-    imagejpeg($image);
-    imagedestroy($image);
-    $_SESSION['security_code'] = $code;
-  }
+	function load_ttf()
+	{
+		$handle = opendir($this->ttf_folder);
+		while($file = readdir ($handle))
+		{
+			if ($file != "." && $file != ".." && $file != "" && $file != ".svn" && $file != "_svn")
+			{
+				$this->ttf_range[] = $file;
+			}
+		}
+		closedir($handle);
+	}
 
+	function random_color($min,$max)
+	{
+		srand((double)microtime() * 1000000);
+		$randcol['r'] = intval(0);
+		srand((double)microtime() * 1000000);
+		$randcol['g'] = intval(0);
+		srand((double)microtime() * 1000000);
+		$randcol['b'] = intval(0);
+
+		return $randcol;
+	}
+
+	function random_char()
+	{
+
+		$chars_image_activate=array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '2', '3', '4', '5', '6', '7', '8', '9'); // 0 o l 1 look too similar
+		$randcharindex = rand(0, count($chars_image_activate)-1);
+		
+		return $chars_image_activate[$randcharindex];
+	}
+
+	function generate_private()
+	{
+		$this->privkey = "";
+		for($i=0; $i < $this->chars_image_activate; $i++)
+		{
+
+			$this->privkey .= $this->random_char();
+		}
+
+	}
+
+	function random_ttf()
+	{
+		$filename = $this->ttf_folder;
+		$filename .= $this->ttf_range[rand(0,count($this->ttf_range)-1)];
+		return $filename;
+	}
+
+	function make_captcha()
+	{	
+		$this->generate_private();
+		$image = imagecreatetruecolor($this->lx, $this->ly);
+		
+		// Set Backgroundcolor
+		$randcol['r'] = "255";
+		$randcol['b'] = "255";
+		$randcol['g'] = "255";
+		$back =  imagecolorallocate($image, $randcol['r'], $randcol['g'], $randcol['b']);
+		ImageFilledRectangle($image, 0, 0, $this->lx, $this->ly, $back);
+		// fill with noise or grid
+		if($this->noise > 0)
+		{
+			// random characters in background with random position, angle, color
+			for($i=0; $i < $this->noise; $i++)
+			{
+				srand((double)microtime()*1000000);
+				$size	= intval(rand((int)($this->minsize / 2.3), (int)($this->maxsize / 1.7)));
+				srand((double)microtime()*1000000);
+				$angle	= intval(rand(0, 360));
+				srand((double)microtime()*1000000);
+				$x = intval(rand(0, $this->lx));
+				srand((double)microtime()*1000000);
+				$y = intval(rand(0, (int)($this->ly - ($size / 5))));
+				
+				$randcol['r'] = "0";
+				$randcol['b'] = "0";
+				$randcol['g'] = "0";
+				
+				$color	= imagecolorallocate($image, $randcol['r'], $randcol['g'], $randcol['b']);
+				srand((double)microtime()*1000000);
+				$text	= $this->random_char();
+				ImageTTFText($image, $size, $angle, $x, $y, $color, $this->random_ttf(), $text);
+			}
+		}
+		else
+		{
+			// generate grid
+			for($i=0; $i < $this->lx; $i += (int)($this->minsize / 1.5))
+			{
+				$randcol=$this->random_color(160, 224);
+				$color	= imagecolorallocate($image, $randcol['r'], $randcol['g'], $randcol['b']);
+				@imageline($image, $i, 0, $i, $this->ly, $color);
+			}
+			for($i=0 ; $i < $this->ly; $i += (int)($this->minsize / 1.8))
+			{
+				$randcol=$this->random_color(160, 224);
+				$color	= imagecolorallocate($image, $randcol['r'], $randcol['g'], $randcol['b']);
+				@imageline($image, 0, $i, $this->lx, $i, $color);
+			}
+		}
+
+		for($i=0, $x = intval(rand($this->minsize,$this->maxsize)); $i < $this->chars_image_activate; $i++)
+		{
+			$text	= strtolower(substr($this->privkey, $i, 1));
+			srand((double)microtime()*1000000);
+			$angle	= intval(rand(($this->maxrotation * -1), $this->maxrotation));
+			srand((double)microtime()*1000000);
+			$size	= intval(rand($this->minsize, $this->maxsize));
+			srand((double)microtime()*1000000);
+			$y		= intval(rand((int)($size * 1.5), (int)($this->ly - ($size / 7))));
+			$randcol=$this->random_color(0, 127);
+			$color	=  imagecolorallocate($image, $randcol['r'], $randcol['g'], $randcol['b']);
+			$randcol=$this->random_color(0, 127);
+			$shadow = imagecolorallocate($image, $randcol['r'] + 127, $randcol['g'] + 127, $randcol['b'] + 127);
+			$TTF_file=$this->random_ttf();
+			ImageTTFText($image, $size, $angle, $x + (int)($size / 15), $y, $shadow, $TTF_file, $text);
+			ImageTTFText($image, $size, $angle, $x, $y - (int)($size / 15), $color, $TTF_file, $text);
+			$x += (int)($size + ($this->minsize / 5));
+		}
+	
+		$filename="captcha_".sha1(uniqid (rand())).".png";
+		ImagePNG($image, $this->tmpfolder.$filename);
+
+		ImageDestroy($image);
+		$this->filename = $this->tmpfolder.$filename;
+	}
 }
-
-$width      = isset($_GET['width']) ? $_GET['width'] : '350';
-$height     = isset($_GET['height']) ? $_GET['height'] : '130';
-$characters = isset($_GET['characters']) && 1 < $_GET['characters'] ? $_GET['characters'] : '8';
-
-$captcha = new CaptchaSecurityImages($width, $height, $characters);
-
-
 ?>

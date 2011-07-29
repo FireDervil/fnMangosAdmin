@@ -2,6 +2,7 @@
 
 include 'header.php';
 include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'include' . DS . 'functions.mangos.php';
+include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'class' . DS . 'captcha' . DS .'fncaptcha.php';
 
 xoops_loadLanguage('user', 'fnMangosAdmin');
 
@@ -10,8 +11,11 @@ foreach ( $_POST as $k => $v ) { ${$k} = $v; }
 foreach ( $_GET as $k => $v ) { ${$k} = $v; }
 
 // defines
-$fnmaConfig['max_act_per_ip'] = 10;
-$fnmaConfig['use_user_activate'] = true;
+$xoopsModuleConfig['max_act_per_ip'] = 10;
+$xoopsModuleConfig['use_user_activate'] = true;
+$xoopsModuleConfig['reg_act_imgvar'] = true;
+$xoopsModuleConfig['reg_secret_questions'] = false;
+
 
 switch ($op) {
 case "cancel":
@@ -43,22 +47,20 @@ case "register":
 
 		// Ext 1 - Image verification
 		// We need to see if its enabled, and if the user put in the right code
-		if($reg_act_imgvar == true)
+		if($xoopsModuleConfig['reg_act_imgvar'] == true)
 		{
-			$image_key =& $_POST['image_key'];
+			$image_key = $_POST['image_key'];
 			$filename = mysql_real_escape_string($_POST['filename_image']);
-			$correctkey = $fnmaDB["sys"]->selectCell("SELECT key FROM ".$xoopsDB->prefix('fnma_creation_captcha')." WHERE `filename` ='".$filename."'");
-			
+			$correctkey = $fnmaDB["sys"]->select("SELECT * FROM ".$xoopsDB->prefix('fnma_acc_captcha')." WHERE filename='".$filename."'");
+
 			// Check for key match
-			if(strtolower($correctkey) != strtolower($image_key) || $image_key == '')
+			if(strtolower($correctkey[1]['key']) != strtolower($image_key) || $image_key == '')
 			{
 				$notreturn = true;
-				$err_array[] = $lang['image_var_incorrect'];
-			}
-			else # keys match
-			{
+				$err_array[] = _MD_FNMA_USER_CAPTCHA_WRONG;
+			} else {
 				// Delete the key from the DB, and delete the image from the cache folder
-				$fnmaDB["sys"]->query("DELETE FROM ".$xoopsDb->prefix('fnma_creation_captcha')." WHERE filename='".$filename."'");
+				$fnmaDB["sys"]->query("DELETE FROM ".$xoopsDB->prefix('fnma_acc_captcha')." WHERE filename='".$filename."'");
 				@unlink($filename);
 			}
 		}
@@ -66,7 +68,7 @@ case "register":
 		
 		// Ext 2 - secret questions
 		// Check if user questions are required, if so we need to check for symbols, and character lenght
-		if ($reg_secret_questions == true)
+		if ($xoopsModuleConfig['reg_secret_questions'] == true)
 		{
 			if ($_POST['secretq1'] && $_POST['secretq2'] && $_POST['secreta1'] && $_POST['secreta2']) 
 			{
@@ -125,13 +127,12 @@ case "register":
 		// @$Enter is the main input arrays into the function
 		$Enter = $fnmaAccount->register2(
 			array(
-				'username' => $_POST['r_login'],
-				'sha_pass_hash' => $_POST['r_pass'],
-				'sha_pass_hash2' => $_POST['r_cpass'],
-				'email' => $_POST['r_email'],
-				'expansion' => $_POST['r_account_type'],
-				'password' => $_POST['r_pass']
-				)
+				'r_login' => $_POST['r_login'],
+				'r_pass' => $_POST['r_pass'],
+				'r_cpass' => $_POST['r_cpass'],
+				'r_email' => $_POST['r_email'],
+				'r_account_type' => $_POST['r_account_type']
+				), true
 			);
 		// lets catch the return on the register function
 		if($Enter == 1) # 1 = success
@@ -202,6 +203,16 @@ default:
 	$xoopsOption['xoops_module_header']= $xoops_module_header;
 	$xoopsTpl->assign('xoops_pagetitle', $xoops_pagetitle);
 	$xoopsTpl->assign('xoops_module_header', $xoops_module_header);
+	// Initialize random image:
+	$captcha = new Captcha;
+	$captcha->load_ttf();
+	$captcha->make_captcha();
+	$captcha->delold();
+	$filename = $captcha->filename;
+	$privkey = $captcha->privkey;
+	$xoopsTpl->assign('filename', $filename);
+	$xoopsTpl->assign('privkey', $privkey);
+	$fnmaDB["sys"]->query("INSERT INTO ".$xoopsDB->prefix('fnma_acc_captcha')." VALUES('', '$filename','$privkey')");
 	
 	// language Array
 	$xoopsTpl->assign(array(

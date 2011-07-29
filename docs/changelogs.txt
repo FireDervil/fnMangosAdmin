@@ -1,3 +1,13 @@
+=>version 1.12 (FireDervil)
+--------------------
+- NEW: neue Methoden zur Account Klasse hinzugefügt, die ein genaueres Filtern zulassen
+- BUG: behoben der die Benutzer Registrierung unmöglich machte
+- BUG: behoben, der beim Registrieren unsterschiedliche Passwörter erstellte, diese wichen damit vom Login ab
+- NEW: Captcha nun in der Registrierung enthalten
+- BUG: eMail prüfung korregiert, die eMails werden nun auf korreckt gültige Zeichen geprüft
+- BUG: Email Templates beim Registrieren sind noch nicht vorhanden ( kommt später, sowie der DB eintrag in der Konfig.)
+
+
 =>version 1.11 (FireDervil)
 --------------------
 - BUG: vergessen, die Revisionsnummer von 1.09 auf 1.10 zu setzen im letzten Commit

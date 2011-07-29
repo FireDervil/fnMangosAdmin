@@ -79,6 +79,45 @@ class fnmaAccount
         $this->mysql["sys"]->query("UPDATE ".$this->dbx->prefix('fnma_account_extend')." SET account_level='2' WHERE account_id='".$id."'");
 		return TRUE;
 	}
+
+//	************************************************************
+// Checks to see of an IP address is banned
+// Returns true if the IP is banned
+	
+	function isBannedIp()
+	{
+		$check = $this->mysql["logon"]->mysql_count("SELECT COUNT(*) FROM ip_banned WHERE ip='".$_SERVER['REMOTE_ADDR']."'");
+		if ($check > 0)
+		{
+			return true; // IP is banned
+		}
+		else
+		{
+			return false; // IP is not banned
+		}
+	}
+
+//	************************************************************
+// Checks to see if the account is banned
+// Returns true is the account id is banned
+// @$account_id is the account id
+
+	function isBannedAccount($account_id)
+	{
+		$check = $this->mysql["logon"]->mysql_count("SELECT COUNT(*) FROM account_banned WHERE id='".$account_id."' AND `active`=1");
+		if ($check > 0)
+		{
+			return true; // Account is banned
+		}
+		else
+		{
+			return false; // Account is not banned
+		}
+	}
+
+
+
+
     /**
       String, returns the email of an account.
       @param $id the account's ID
@@ -112,7 +151,7 @@ class fnmaAccount
     public function getGmLevel($id)
     {
         $id = mysql_real_escape_string($id);
-        $sql = $this->mysql["logon"]->retrieve("SELECT `gmlevel` FROM `account` WHERE `id` = '$id' LIMIT 1");
+        $sql = $this->mysql["logon"]->retrieve("SELECT gmlevel FROM account WHERE id = '$id' LIMIT 1");
         $row = mysql_fetch_array($sql);
         return $row['gmlevel'];
     }
@@ -243,21 +282,21 @@ class fnmaAccount
 		}
 		
 		// If the param username is empty
-        if(empty($params['username']))
+        if(empty($params['r_login']))
 		{
 			return 2;
             $success = 0;
         }
 		
 		// If the password hash is emtpy, OR the 2 posted passwords dont match
-        if(empty($params['sha_pass_hash']) || $params['sha_pass_hash'] != $params['sha_pass_hash2'])
+        if(empty($params['r_pass']) || $params['r_pass'] != $params['r_cpass'])
 		{
 			return 3;
             $success = 0;
         }
 		
 		// Is email is empty
-        if(empty($params['email']))
+        if(empty($params['r_email']))
 		{
 			return 4;
             $success = 0;
@@ -275,17 +314,28 @@ class fnmaAccount
 		{
 			return true;
 		}
-        unset($params['sha_pass_hash2']);
-        $password = $params['password'];
-        unset($params['password']);
 		
+		//$user = mysql_real_escape_string($params['password']);
+        //$pass = mysql_real_escape_string($params['password']);
+        //$email = mysql_real_escape_string($params['email']);
+       //$ip = mysql_real_escape_string($ip);
+        //$expansion = mysql_real_escape_string($expansion);
+        //$id = mysql_real_escape_string($id);
+
+        if(strlen($params['r_pass']) > 16) return 0;
+
+        $user = strtoupper($params['r_login']);
+        $pass = strtoupper($params['r_pass']);
+        $pass_hash = SHA1($user.':'.$pass);
+
+        if(strlen($pass_hash) > 40) return 0;
 		// If email activation is set in the config
         if((int)$xoopsModuleConfig['require_act_activation'] == 1)
 		{
 			// Setup an activation key, Set locked to 1 so the user cant login, insert into DB
             $tmp_act_key = $this->generate_key();
             $params['locked'] = 1;
-			$acc_id = $this->db["logon"]->query("INSERT INTO account(
+			$acc_id = $this->mysql["logon"]->query("INSERT INTO account(
 				`username`,
 				`sha_pass_hash`,
 				`email`,
@@ -293,21 +343,20 @@ class fnmaAccount
 				`expansion`)
 			   VALUES(
 				'".$params['username']."',
-				'".$params['sha_pass_hash']."',
-				'".$params['email']."',
+				'".$pass_hash."',
+				'".$params['r_email']."',
 				'".$params['locked']."',
-				'".$params['expansion']."')
+				'".$params['r_account_type']."')
 			   ");
 			   
 			// If the insert into account query was successful
             if($acc_id == true)
 			{
-				$u_id = $this->db["logon"]->selectCell("SELECT `id` FROM `account` WHERE `username` LIKE '".$params['username']."'");
-				
+				$u_id = $this->mysql["logon"]->selectCell("SELECT `id` FROM `account` WHERE `username` LIKE '".$params['r_login']."'");		
                 // If we dont want to insert special stuff in account_extend...
                 if ($account_extend == NULL)
 				{
-                    $this->db["sys"]->query("INSERT INTO ".$this->dbx->prefix('fnma_account_extend')."(
+                    $this->mysql["sys"]->query("INSERT INTO ".$this->dbx->prefix('fnma_account_extend')."(
 						`account_id`,
 						`account_level`,
 						`registration_ip`,
@@ -318,10 +367,9 @@ class fnmaAccount
 						'".$_SERVER['REMOTE_ADDR']."',
 						'".$tmp_act_key."')
 					");
-                } 
-                else # We do want to insert into account extend
-				{
-                    $this->db["sys"]->query("INSERT INTO ".$this->dbx->prefix('fnma_account_extend')."(
+                } else {
+					# We do want to insert into account extend
+                    $this->mysql["sys"]->query("INSERT INTO ".$this->dbx->prefix('fnma_account_extend')."(
 						`account_id`,
 						`account_level`,
 						`registration_ip`, 
@@ -345,43 +393,37 @@ class fnmaAccount
 				// Send the activation email
                 $act_link = (string)$Config->get('site_base_href').'?p=account&sub=activate&id='.$u_id.'&key='.$tmp_act_key;
                 $email_text  = '== Account activation =='."\n\n";
-                $email_text .= 'Username: '.$params['username']."\n";
-                $email_text .= 'Password: '.$password."\n";
+                $email_text .= 'Username: '.$params['r_login']."\n";
+                $email_text .= 'Password: '.$pass."\n";
                 $email_text .= 'This is your activation key: '.$tmp_act_key."\n";
                 $email_text .= 'CLICK HERE : '.$act_link."\n";
-                send_email($params['email'],$params['username'],'== '.(string)$Config->get('site_title').' account activation ==',$email_text);
+                send_email($params['r_email'],$params['r_login'],'== '.(string)$Config->get('site_title').' account activation ==',$email_text);
                 return 1;
-            }
-			
-			// Insert into account table failed
-			else
-			{
+            } else {
+				// Insert into account table failed
                 return 6;
             }
-        }
-		
-		// Email activation disabled
-		else
-		{
-			$acc_id = $this->db["logon"]->query("INSERT INTO account(
-				`username`,
-				`sha_pass_hash`,
-				`email`,
-				`expansion`)
+        } else {
+			// Email activation disabled
+			$acc_id = $this->mysql["logon"]->query("INSERT INTO account(
+				username,
+				sha_pass_hash,
+				email,
+				expansion)
 			   VALUES(
-				'".$params['username']."',
-				'".$params['sha_pass_hash']."',
-				'".$params['email']."',
-				'".$params['expansion']."')
+				'".$params['r_login']."',
+				'".$pass_hash."',
+				'".$params['r_email']."',
+				'".$params['r_account_type']."')
 			");
 			
 			// If insert into account table was successfull
             if($acc_id == true)
 			{
-				$u_id = $this->db["logon"]->selectCell("SELECT `id` FROM `account` WHERE `username` LIKE '".$params['username']."'");
+				$u_id = $this->mysql["logon"]->selectCell("SELECT id FROM account WHERE username LIKE '".$params['r_login']."'");
                 if ($account_extend == NULL)
 				{
-                    $this->db["sys"]->query("INSERT INTO ".$this->dbx->prefix('fnma_account_extend')."(
+                    $this->mysql["sys"]->query("INSERT INTO ".$this->dbx->prefix('fnma_account_extend')."(
 						`account_id`,
 						`account_level`,
 						`registration_ip`)
@@ -391,10 +433,9 @@ class fnmaAccount
 						'".$_SERVER['REMOTE_ADDR']."'
 					   )
 					");
-                }
-				else
-				{
-                    $this->db["sys"]->query("INSERT INTO ".$this->dbx->prefix('fnma_account_extend')."(
+                } else {
+					
+                    $this->mysql["sys"]->query("INSERT INTO ".$this->dbx->prefix('fnma_account_extend')."(
 						`account_id`,
 						`account_level`,
 						`registration_ip`, 
@@ -413,9 +454,7 @@ class fnmaAccount
 					");
                 }
                 return 1;
-            }
-            else
-			{
+            } else {
                 return 6;
             }
         }
@@ -613,6 +652,63 @@ class fnmaAccount
 		{
 			return false; // username is not available
 		}
+    }
+	//	************************************************************
+// Check if the email is available. Post an email address here.
+// returns returns true if the email is available.
+
+    function isAvailableEmail($email)
+	{
+        $res = $this->mysql["logon"]->mysql_count("SELECT COUNT(*) FROM `account` WHERE `email`='".$email."'");
+        if($res == 0) 
+		{
+			return true; // email is available
+		}
+		else
+		{
+			return false; // email is not available
+		}
+    }
+
+//	************************************************************
+// Check if the email is available. Post an email address here.
+// returns returns true if the email is available.
+
+    public function isLostPassEmail($email)
+	{
+        $res = $this->mysql["logon"]->mysql_count("SELECT COUNT(*) FROM account WHERE email='".$email."'");
+        if($res == 1) 
+		{
+			return true; // email is available for lostpass.php
+		}
+		else
+		{
+			return false; // email is not available for lostpass.php
+		}
+    }
+
+	public function returnEmailUserData($email)
+	{
+		
+		$res = $this->mysql["logon"]->selectRow("SELECT * FROM account	WHERE email='".$email."'");
+        return $res;
+		
+	}
+
+//	************************************************************	
+// Checks if the email is in valid format.
+// returns returns true if the email is a valid email
+
+    function isValidEmail($email)
+	{
+        if(preg_match('#^.{1,}@.{2,}\..{2,}$#', $email) == 1)
+		{
+            return true; // email is valid
+        }
+		else
+		{
+            return false; // email is not valid
+        }
     }
 	
 	function setErrors($err_no, $err_str)

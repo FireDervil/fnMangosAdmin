@@ -11,11 +11,14 @@
 					<option value="1"><{$lang_tbc}></option>
 					<option value="0"><{$lang_classic}></option>
 				</select><br /><br />
-                <input type="hidden" name="filename_image" value="<{$captcha_filename}>"/>
+                <img src="<{$filename}>"  alt=""/><br /><br />
+                <input type="hidden" name="filename_image" value="<{$filename}>"/>
 					<b><{$lang_captcha_info}></b>
 					<br />
 					<input type="text" name="image_key"/><br /><br />
-    <{$lang_reg_secret}> <input type="text" name="r_secret" size="15" maxlength="8" /><br /><br />
+                      <{$lang_reg_secret}> 
+                      <br /> <br  />
+                      <input type="text" name="r_secret" size="15" maxlength="8" /><br /><br />
     
     <input type="hidden" name="op" value="register" />
     <input type="hidden" name="xoops_redirect" value="<{$redirect_page}>" />
