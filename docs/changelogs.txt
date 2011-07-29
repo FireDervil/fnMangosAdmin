@@ -1,3 +1,27 @@
+=>version 1.11 (FireDervil)
+--------------------
+- BUG: vergessen, die Revisionsnummer von 1.09 auf 1.10 zu setzen im letzten Commit
+- BUG: die changelog.txt im letzten Commit nicht mit übertragen, ist nun wieder drin
+
+
+=>version 1.09 (FireDervil)
+--------------------
+- NEW: kosmetisches Update für den Adminbereich
+		Die Wesentlichen punkte zum bearbeiten einiger Inhalte sind nun vorhanden,
+		andere wiederrum fehlen noch
+- NEW: Funktionen zum bearbeiten und zum erleichtern der Bedienung sind hinzugefügt worden.
+- NEW: einige neue Tabellen sind hinzugekommen
+- NEW: arbeit für das Sozial Plugin hat angefangen, erste Inhalte sieht man bereits, funktionieren jedoch nicht 100%
+- NEW: Newsverwaltung ist implementiert und läuft soweit
+- NEW: Spielerverlwatung im Adminbereich ist implementiert und läuft so weit
+- NEW: die Voteseiten Verwaltung ist implementiert und läuft so weit
+- NEW: Neue Icons wurden dem Adminbereich hinzugefügt!
+- BUG: wärend des Modulupdates wurde ein SQLAufruf mehrfach ausgeführt, das zum Überschreiben der vorherigen Daten führte
+- BUG: 2 Datenbanktabellen wurden ubenannt, da diese im Adminbereich sonst zu lang gewesen wären
+- MOD: viele änderungen an Sprachdateien, dem Memberbereich, Adminbereich, Klassen und Funktionsdatein.
+- MOD: begonnen die SSH Verwaltung und den Socketserver einzubauen
+- TODO: es kommt noch einiges an Änderungen in den kommenden Updates :)
+
 =>version 1.09 (FireDervil)
 --------------------
 - BUG: behoben der die OnInstall / OnUpdate Funktion nicht ausführte
