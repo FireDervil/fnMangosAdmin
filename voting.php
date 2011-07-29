@@ -34,7 +34,7 @@ $vote_sites = $fnmaDB["sys"]->select("SELECT * FROM ".$xoopsDB->prefix('fnma_vot
 
 function initUser()
 {
-	global $vote_sites, $fnmaDB, $xoopsDB, $user;
+	global $vote_sites, $fnmaDB, $xoopsDB, $fnmaUser;
 	
 	$return = array();
 
@@ -43,7 +43,7 @@ function initUser()
 	foreach($vote_sites as $site)
 	{
 		$id = $site['id'];
-		$get_voting = $fnmaDB["sys"]->selectRow("SELECT * FROM ".$xoopsDB->prefix('fnma_voting')." WHERE `user_ip` LIKE '".$_SERVER["REMOTE_ADDR"]."' AND `site`='".$id."' LIMIT 1");
+		$get_voting = $fnmaDB["sys"]->selectRow("SELECT * FROM ".$xoopsDB->prefix('fnma_voting')." WHERE user_ip LIKE '".$_SERVER["REMOTE_ADDR"]."' AND site='".$id."' LIMIT 1");
 		if($get_voting != FALSE)
 		{
 			// Here we find the reset time for the vote site
@@ -141,7 +141,7 @@ switch($op)
 			{
 				$fp = @fsockopen($tab_sites['hostname'], 80, $errno, $errstr, 3);
 			} else {
-				$fp = True;
+				$fp = TRUE;
 			}
 			
 			if($fp)
@@ -159,9 +159,9 @@ switch($op)
 					total_votes=(total_votes + 1), 
 					points_earned=(points_earned + ".$tab_sites['points'].")  
 				   WHERE account_id = ".$_SESSION['fnmaUserId']." LIMIT 1");
-				xoops_result('info', 'Redirecting to vote site...');
-				echo "<script type=\"text/javascript\">setTimeout(window.open('".$tab_sites['votelink']."', '_self'),0);</script>";
+
 				redirect_header('voting.php', 1);
+				redirect_header($tab_sites['votelink'], 0, _MD_FNMA_VOTES_REDIRECT);
 				exit();
 			} else {
 				redirect_header('voting.php', 1, _MD_FNMA_VOTES_ERROR2);
@@ -186,9 +186,13 @@ switch($op)
 	if($Voted == '1')
 	{
 		$disabled = 'disabled="disabled"';
-	}else{
+	} else {
 		$disabled = '';
 	}
+	if($vote_sites == ''){
+		$vote_sites = 'DISABLED';
+	}
+	
 	$xoopsTpl->assign('voted', $Voted);
 	$xoopsTpl->assign('vote_sites', $vote_sites);
 	$xoopsTpl->assign('user', $user);

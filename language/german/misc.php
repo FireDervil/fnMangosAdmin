@@ -38,7 +38,7 @@ define('_MD_FNMA_MEMBER_SUBHEADER', '<h1>Mitgliederbereich - Menu:</h1>');
 
 // voting.php
 define('_MD_FNMA_VOTE_INFO', 'You can click each link <b>once every 12 to 24 hours</b> due to vote site limits.');
-
+define('_MD_FNMA_TOOLS_NODATA', 'Es sind keine Daten zur Seite / Modul vorhanden!');
 define('_MD_FNMA_VOTE_ACCT_DETAIL', 'Kontodetails >> Voting');
 define('_MD_FNMA_VOTE_CURRACCT', 'aktuelles Votekonto: ');
 define('_MD_FNMA_VOTE_COUNT', 'Votes gesamt: ');

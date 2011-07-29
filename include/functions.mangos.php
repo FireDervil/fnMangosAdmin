@@ -63,7 +63,13 @@ function getAccountList($id)
 		return $list;
 		}
 	}	
-
+function checkLock($row){
+	if($row == 1){
+		return _MD_FNMA_USER_ACT_LOCKED;
+	} elseif ($row == 0){
+		return _MD_FNMA_USER_ACT_UNLOCKED;
+	}
+}
 
 function getRealmlist()
 {

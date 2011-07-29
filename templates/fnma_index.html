@@ -29,7 +29,13 @@
       <td><{$smarty.const._MD_FNMA_NEWSAUTHOR}> <{$news.posted_by}></td>
       <td>&nbsp;</td>
       <td><g:plusone size="medium"></g:plusone></td>
-      <td><{$smarty.const._MD_FNMA_NEWSDATE}> <{$news.post_time}></td>
+      <td><{$smarty.const._MD_FNMA_NEWSDATE}> <{$news.post_time|date_format:$config.date}></td>
+    </tr>
+    <tr>
+    	<td colspan="4" height="10"></td>
+    </tr>
+    <tr>
+    	<td colspan="4"><hr noshade="noshade" /></td>
     </tr>
     
 <{/foreach}>

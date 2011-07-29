@@ -20,25 +20,65 @@ class fnmaAccount
 		$this->dbx = $xoopsDB;
     }
 
-    /**
-      Boolean, ban an account.
-      If nothing went wrong returns true.
-      @param $id the account's ID
-      @param $time the ammount of time (in seconds) the account has to be banned
-      @param $bannedby the GM who has banned the account (default void)
-      @param $reason the reason why the account has been banned (default void)
-    */
-    public function ban($id,$time,$bannedby="",$reason="")
-    {
-        $id = mysql_real_escape_string($id);
-        $bandate = time();
-        $unbandate = $bandate + $time;
-        $bannedby = mysql_real_escape_string($bannedby);
-        $reason = mysql_real_escape_string($reason);
-        $this->mysql["logon"]->send("INSERT INTO `account_banned` (id,bandate,unbandate,bannedby,banreason,active) VALUES ('$id','$bandate','$unbandate','$bannedby','$reason','1')");
-        return true;
-    }
+ //	************************************************************
+// This function bans an account, 
+// POST account id, reason, and banned by.
+// @$banip: 1 = yes, ban the IP as well, 0 = Dont ban IP
+	
+	function banAccount($bannid, $banreason, $bannedby, $banip = 0)
+	{
+		$timez = time();
+		$unban = $timez - 10;
+		$this->mysql["logon"]->query("INSERT INTO account_banned(
+			id, 
+			bandate, 
+			unbandate, 
+			bannedby, 
+			banreason, 
+			active) 
+		   VALUES(
+			'".$bannid."', 
+			'".$timez."', 
+			'".$unban."',
+			'".$bannedby."',
+			'".$banreason."',
+			'1')
+		");
+		
+		// If banip is set to 1, then we need to ban the IP
+		if($banip == 1)
+		{
+			$getip = $this->mysql["logon"]->selectCell("SELECT last_ip FROM account WHERE id='".$bannid."'");
+			$this->mysql["logon"]->query("INSERT INTO ip_banned(
+				ip, 
+				bandate, 
+				unbandate, 
+				bannedby, 
+				banreason`) 
+			   VALUES(
+				'". $getip ."', 
+				'". $timez ."', 
+				'". $unban ."',
+				'". $bannedby ."', 
+				'". $banreason. "')
+			");
+		}
+		
+		$this->mysql["sys"]->query("UPDATE ".$this->dbx->prefix('fnma_account_extend')." SET account_level=5 WHERE account_id='".$bannid."'");
+		return TRUE;
+	}
+	
+//	************************************************************
+// Un Bans an account. Just need to post the account ID
 
+	function unbanAccount($id)
+	{
+		$this->mysql["logon"]->query("UPDATE account_banned SET active='0' WHERE id='".$id."'");
+		$ipd = $this->mysql["logon"]->selectCell("SELECT last_ip FROM account WHERE id='".$id."'");
+		$this->mysql["logon"]->query("DELETE FROM ip_banned WHERE ip='".$ipd."'");
+        $this->mysql["sys"]->query("UPDATE ".$this->dbx->prefix('fnma_account_extend')." SET account_level='2' WHERE account_id='".$id."'");
+		return TRUE;
+	}
     /**
       String, returns the email of an account.
       @param $id the account's ID
@@ -501,14 +541,14 @@ class fnmaAccount
 
         if(strlen($newpass) > 16) return false;
 
-        $sql = $this->mysql["logon"]->retrieve("SELECT `username` FROM `account` WHERE `id` = '$id' LIMIT 1");
+        $sql = $this->mysql["logon"]->retrieve("SELECT username FROM account WHERE id = '$id' LIMIT 1");
         $row = mysql_fetch_array($sql);
 
         $pass_hash = SHA1(strtoupper($row['username'].":".strtoupper($newpass)));
 
         if(strlen($pass_hash) > 40) return false;
 
-        $this->mysql["logon"]->send("UPDATE `account` SET `sha_pass_hash` = '$pass_hash', `v` = 0, `s` = 0 WHERE `id` = '$id' LIMIT 1");
+        $this->mysql["logon"]->send("UPDATE account SET sha_pass_hash = '$pass_hash', v = 0, s = 0 WHERE id = '$id' LIMIT 1");
         return true;
     }
 

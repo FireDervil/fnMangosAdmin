@@ -9,7 +9,7 @@ define('_MD_FNMA_POP_LOW', 'OK');
 define('_MD_FNMA_POP_MED', 'mittelmäßig');
 define('_MD_FNMA_POP_HIGH', 'hoch');
 
-define('', '');
+//define('', '');
 
 
 

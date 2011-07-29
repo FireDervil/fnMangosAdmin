@@ -1,8 +1,18 @@
 <?php
 
 define('_MI_FNMA_INDEX', 'Index');
-define('_MI_FNMA_FIRSTMENU', 'Accounts');
+define('_MI_FNMA_USER', 'Spieler');
 define('_MI_FNMA_ABOUT', 'Infos');
+define('_MI_FNMA_NEWS','News');
+define('_MI_FNMA_REALMS','Realms');
+define('_MI_FNMA_VOTES','Votes');
+define('_MI_FNMA_SHOP','Shop');
+define('_MI_FNMA_DONATIONS','Spenden');
+define('_MI_FNMA_FAQS','Faqs');
+define('_MI_FNMA_BANLIST','Ban Listen');
+define('_MI_FNMA_CHAR_TOOLS','Char Tools');
+define('_MI_FNMA_ERROR_LOGS','Error logs');
+
 define('_MI_FNMA_MANAGER_NAME','fnMangosAdmin');
 define('_MI_FNMA_MANAGER_DESC','Mangos Private Server Account Managemnt App!');
 

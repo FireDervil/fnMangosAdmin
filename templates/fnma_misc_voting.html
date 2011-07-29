@@ -35,6 +35,18 @@
 
 <table cellpadding='3' cellspacing='0' width='100%'>
     <tbody>
+     <{if $vote_sites == 'DISABLED'}>
+        <tr>
+        	<td class="serverStatus" colspan="5" align="center" nowrap="nowrap">&nbsp;</td>
+        </tr>
+        <tr>
+			<td class="serverStatus" colspan="5" align="center" nowrap="nowrap"><{$smarty.const._MD_FNMA_TOOLS_NODATA}></td>
+        </tr>
+        <tr>
+        	<td class="serverStatus" colspan="5" align="center" nowrap="nowrap">&nbsp;</td>
+        </tr>
+        <{else}>
+        
 		<tr> 
 			<td class="rankingHeader" align="center" colspan='6' nowrap="nowrap"><{$lang_choose_vote}></td>          
 		</tr>
@@ -45,6 +57,7 @@
 			<td class="rankingHeader" align="center" nowrap="nowrap"><{$lang_points}>&nbsp;</td>
 			<td class="rankingHeader" align="center" nowrap="nowrap"><{$lang_choose}>&nbsp;</td>
 		</tr>
+       
         <{foreach from=$vote_sites  item=value}>
         
         	<form action="voting.php" method="post" target="_blank">
@@ -81,7 +94,7 @@
 				</tr>
 				</form>
 		<{/foreach}>
+        <{/if}>
        </tbody>
 	</table> 
-  </center>      
-        
+  </center>

@@ -91,4 +91,16 @@ CREATE TABLE `fnma_news` (
   `posted_by` text,
   `post_time` int(15) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+CREATE TABLE `fnma_shop_items` (
+  `id` smallint(3) NOT NULL AUTO_INCREMENT,
+  `item_number` varchar(255) CHARACTER SET latin1 NOT NULL DEFAULT '0',
+  `itemset` int(10) NOT NULL DEFAULT '0',
+  `gold` int(25) NOT NULL DEFAULT '0',
+  `quanity` int(25) NOT NULL DEFAULT '1',
+  `desc` varchar(255) CHARACTER SET latin1 DEFAULT NULL,
+  `wp_cost` varchar(5) CHARACTER SET latin1 NOT NULL DEFAULT '0',
+  `realms` int(100) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;

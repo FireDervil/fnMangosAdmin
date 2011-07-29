@@ -6,7 +6,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 
 $modversion["name"] = _MI_FNMA_MANAGER_NAME;
-$modversion["version"] = '1.09';
+$modversion["version"] = '1.10';
 $modversion["description"] = _MI_FNMA_MANAGER_DESC;
 $modversion["image"] = "images/logo/fnMangosAdmin_logo.png";
 $modversion["dirname"] = "fnMangosAdmin";
@@ -49,6 +49,8 @@ $i++;
 $modversion['tables'][$i] = "fnma_online";
 $i++;
 $modversion['tables'][$i] = "fnma_news";
+$i++;
+$modversion['tables'][$i] = "fnma_shop_items";
 $i++;
 
 //install

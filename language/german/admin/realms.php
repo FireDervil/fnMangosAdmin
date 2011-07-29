@@ -1,0 +1,78 @@
+<?php
+
+define('_MD_FNMA_REALMS_RID', 'Default ID:');
+define('_MD_FNMA_REALMS_NAME', 'Realmname:');
+define('_MD_FNMA_REALMS_ADDRESS', 'Realm Adresse:');
+define('_MD_FNMA_REALMS_PORT', 'Realm Port:');
+define('_MD_FNMA_REALMS_RTYPE', 'Realmtüp:');
+define('_MD_FNMA_REALMS_TZONE', 'Realm Sprache: ');
+/*
+
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+define('', '');
+*/
+?>

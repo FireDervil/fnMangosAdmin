@@ -12,12 +12,14 @@ $xoTheme->addStylesheet('modules/'.$xoopsModule->getVar("dirname").'/css/fnma.cs
 $news_array = $fnmaDB["sys"]->select("SELECT * FROM ".$xoopsDB->prefix('fnma_news')." ORDER BY id ASC");
 
 $xoopsTpl->assign('result', $news_array);
-
+$config['date'] = "%d.%m.%Y %H:%M";
+$config['time'] = '%H:%M:%S';
 
 $xoopsTpl->assign(array(
 	"lang_welcomemsg" => sprintf(_MD_FNMA_WELCOME, htmlspecialchars($xoopsConfig['sitename'], ENT_QUOTES)), 
-	"lang_currenttime" => sprintf(_MD_FNMA_TIMENOW, formatTimestamp(time(),"m")))
-	);
+	"lang_currenttime" => sprintf(_MD_FNMA_TIMENOW, formatTimestamp(time(),"m")),
+	"config" => $config,
+	));
 
 		
 include_once XOOPS_ROOT_PATH.'/footer.php';
