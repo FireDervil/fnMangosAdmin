@@ -61,5 +61,10 @@ $fnmaAccount = new fnmaAccount();
 // $fnmaConfig[''] = ;
 // $fnmaConfig[''] = ;
 
+xoops_loadLanguage('header', 'fnMangosAdmin');
+$xoopsOption['template_main']= 'fnma_header.html';
+include XOOPS_ROOT_PATH."/header.php";
+$time = time();
+$xoopsTpl->assign('lang_currenttime', sprintf(_MH_CURRTIME, $time));
 
 ?>

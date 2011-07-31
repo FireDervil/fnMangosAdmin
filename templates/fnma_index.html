@@ -1,46 +1,19 @@
-<{if isset($xoops_modulecss)}>
-   <link rel="stylesheet" type="text/css" href="<{$xoops_modulecss}>" />
+<{include file="db:fnma_header.html"}>
+  
+<{if $displaynav == true}>
+  <div style="text-align: center;">
+    <form name="form1" action="index.php" method="get">
+    <{$topic_select}> <select name="storynum"><{$storynum_options}></select> <input type="submit" value="<{$lang_go}>" /></form>
+  </div>
 <{/if}>
-<div>
-<{$smarty.const._MD_FNMA_WELCOME_INTRO}>
-</div>
-<br /><br />
-<div class="clear"></div>
-<span class="news_header"><{$smarty.const._MD_FNMA_NEWS_HEADER}></span>
-<div id="index_stats">
 
-</div>
-<div id="news">
-<table width="100%" align='center'>
-<{foreach from=$result item=news}>
-	<tr>
-    	<td colspan="4"><span style="text-align:left"><b><{$news.title}></b></span> </td>
-    </tr>
-    <tr>
-    	<td colspan="4" height="5"></td>
-    </tr>
-    <tr>
-    	<td colspan="4"><{$news.message}></td>
-    </tr>
-    <tr>
-    	<td colspan="4" height="5"></td>
-    </tr>
-    <tr>
-      <td><{$smarty.const._MD_FNMA_NEWSAUTHOR}> <{$news.posted_by}></td>
-      <td>&nbsp;</td>
-      <td><g:plusone size="medium"></g:plusone></td>
-      <td><{$smarty.const._MD_FNMA_NEWSDATE}> <{$news.post_time|date_format:$config.date}></td>
-    </tr>
-    <tr>
-    	<td colspan="4" height="10"></td>
-    </tr>
-    <tr>
-    	<td colspan="4"><hr noshade="noshade" /></td>
-    </tr>
-    
-<{/foreach}>
+<!-- start news item loop -->
+<{section name=i loop=$stories}>
+  <{include file="db:fnma_news_item.html" story=$stories[i]}>
+  <br />
+<{/section}>
+<!-- end news item loop -->
 
-</table>
-
-</div>
-<br />
+<div style="text-align: right; margin: 10px;"><{$pagenav}></div>
+<!-- no comments, they come maybe in alter updates -->
+<!-- <{include file='db:system_notification_select.html'}> -->

@@ -6,7 +6,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 
 $modversion["name"] = _MI_FNMA_MANAGER_NAME;
-$modversion["version"] = '1.12';
+$modversion["version"] = '1.13';
 $modversion["description"] = _MI_FNMA_MANAGER_DESC;
 $modversion["image"] = "images/logo/fnMangosAdmin_logo.png";
 $modversion["dirname"] = "fnMangosAdmin";
@@ -49,6 +49,8 @@ $i++;
 $modversion['tables'][$i] = "fnma_online";
 $i++;
 $modversion['tables'][$i] = "fnma_news";
+$i++;
+$modversion['tables'][$i] = "fnma_news_topics";
 $i++;
 $modversion['tables'][$i] = "fnma_shop_items";
 $i++;
@@ -148,6 +150,14 @@ $i++;
 $modversion['templates'][$i]['file'] = 'fnma_misc_customize.html';
 $modversion['templates'][$i]['description'] = 'template for the customize page';
 $i++;
+//Test and debuggin templates
+$modversion['templates'][$i]['file'] = 'fnma_news_article.html';
+$modversion['templates'][$i]['description'] = 'template for the customize page';
+$i++;
+$modversion['templates'][$i]['file'] = 'fnma_news_item.html';
+$modversion['templates'][$i]['description'] = 'template for the customize page';
+$i++;
+
 
 // config
 $i = 1;

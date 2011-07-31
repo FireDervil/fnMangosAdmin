@@ -1,3 +1,15 @@
+=>version 1.13 (FireDervil)
+--------------------
+- NEW: News Verwaltung im Adminbereich überarbeitet
+- NEW: die News anzeige im Hauptbereich überarbeitet / erweitert
+- NEW: neue templates für die einzelnen News Bereich hinzugefügt
+- NEW die entsprechenden News einsträge in die SQL datei hinzugefügt
+- NEW: neue Klasse für die News erstellt, da diese nun wieder von der internen XoopsDB geladen werden
+- BUG: Ein Fehler behoben, bei dem die Anzeige der bereits vorhandenen News gelöscht wurde
+- BUG: ein Template gorregiert, das anstatt des aktuellen benutzernamens die aktuelle Serverzeit anzeigte
+- CHG: in der Sprachdatei mehrere definitionen in eigene Dateien verschoben ( hier werden noch wietere folgen)
+- CHG: die Konfiguration des Moduls beinhaltet nun auch die Einstellungen zu den News
+
 =>version 1.12 (FireDervil)
 --------------------
 - NEW: neue Methoden zur Account Klasse hinzugefügt, die ein genaueres Filtern zulassen
