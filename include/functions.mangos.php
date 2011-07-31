@@ -348,17 +348,17 @@ function get_print_gold($gold_array)
 	if($gold_array['gold'] > 0) 
 	{
 		echo $gold_array['gold'];
-		echo "<img src='inc/admin/images/icons/gold.GIF' border='0'>&nbsp;";
+		echo "&nbsp;<img src=\"images/icons/money/gold.gif\" border=\"0\">&nbsp;";
 	}
 	if($gold_array['silver'] > 0) 
 	{
 		echo $gold_array['silver'];
-		echo "<img src='inc/admin/images/icons/silver.GIF' border='0'>&nbsp;";
+		echo "&nbsp;<img src=\"images/icons/money/silver.gif\" border=\"0\">&nbsp;";
 	}
 	if($gold_array['copper'] > 0) 
 	{
 		echo $gold_array['copper'];
-		echo "<img src='inc/admin/images/icons/copper.GIF' border='0'>&nbsp;";
+		echo "&nbsp;<img src=\"images/icons/money/copper.gif\" border=\"0\">&nbsp;";
 	}
 }
 

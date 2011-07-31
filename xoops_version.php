@@ -6,7 +6,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 
 $modversion["name"] = _MI_FNMA_MANAGER_NAME;
-$modversion["version"] = '1.13';
+$modversion["version"] = '1.14';
 $modversion["description"] = _MI_FNMA_MANAGER_DESC;
 $modversion["image"] = "images/logo/fnMangosAdmin_logo.png";
 $modversion["dirname"] = "fnMangosAdmin";
@@ -74,6 +74,9 @@ $i++;
 $modversion['sub'][$i]['name'] = _MI_FNMA_SMNAME8;
 $modversion['sub'][$i]['url'] = "member.php";
 $i++;
+$modversion['sub'][$i]['name'] = _MI_FNMA_SMNAME9;
+$modversion['sub'][$i]['url'] = "shop.php";
+$i++;
 } else {
 $modversion['sub'][$i]['name'] = _MI_FNMA_SMNAME6;
 $modversion['sub'][$i]['url'] = "user.php";
@@ -109,55 +112,60 @@ $modversion["search"]["func"] = "";
 // Templates
 $i=0;
 $modversion['templates'][$i]['file'] = 'fnma_login_form_realm.html';
-$modversion['templates'][$i]['description'] = 'Template for login into realm X';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_register_form_realm.html';
-$modversion['templates'][$i]['description'] = 'template to register account on realm x';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_index.html';
-$modversion['templates'][$i]['description'] = 'template for the fnma index page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_status.html';
-$modversion['templates'][$i]['description'] = 'template for realmstatus page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_201.html';
-$modversion['templates'][$i]['description'] = 'template for the error page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_server_chars.html';
-$modversion['templates'][$i]['description'] = 'template for the error page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_server_topkills.html';
-$modversion['templates'][$i]['description'] = 'template for the top_kills page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_userinfo.html';
-$modversion['templates'][$i]['description'] = 'template for the error page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_header.html';
-$modversion['templates'][$i]['description'] = 'template for the error page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_server_online.html';
-$modversion['templates'][$i]['description'] = 'template for the online page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_member.html';
-$modversion['templates'][$i]['description'] = 'template for the member page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_misc_voting.html';
-$modversion['templates'][$i]['description'] = 'template for the voting page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_misc_chgname.html';
-$modversion['templates'][$i]['description'] = 'template for the changename page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 $modversion['templates'][$i]['file'] = 'fnma_misc_customize.html';
-$modversion['templates'][$i]['description'] = 'template for the customize page';
+$modversion['templates'][$i]['description'] = '';
 $i++;
 //Test and debuggin templates
-$modversion['templates'][$i]['file'] = 'fnma_news_article.html';
-$modversion['templates'][$i]['description'] = 'template for the customize page';
+$modversion['templates'][$i]['file'] = 'fnma_news_article.html'; // added v1.14
+$modversion['templates'][$i]['description'] = '';
 $i++;
-$modversion['templates'][$i]['file'] = 'fnma_news_item.html';
-$modversion['templates'][$i]['description'] = 'template for the customize page';
+$modversion['templates'][$i]['file'] = 'fnma_news_item.html'; // added v1.14
+$modversion['templates'][$i]['description'] = '';
 $i++;
-
+$modversion['templates'][$i]['file'] = 'fnma_shop.html'; // added v1.15
+$modversion['templates'][$i]['description'] = '';
+$i++;
+$modversion['templates'][$i]['file'] = 'fnma_shop_checkout.html'; // added v1.15
+$modversion['templates'][$i]['description'] = '';
+$i++;
 
 // config
 $i = 1;

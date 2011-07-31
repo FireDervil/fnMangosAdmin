@@ -11,6 +11,7 @@ define('_FNMA_PRINTER_FRIENDLY', 'Druckerfreundliche Seite');
 define('_FNMA_SEND_NEWS', 'News schrieben');
 define('_POSTED_BY', 'geschrieben von: ');
 define('_READS', 'gelesen');
+/*
 define('', '');
 define('', '');
 define('', '');
@@ -26,4 +27,5 @@ define('', '');
 define('', '');
 define('', '');
 define('', '');
+*/
 ?>

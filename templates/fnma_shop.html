@@ -1,0 +1,45 @@
+<{include file="db:fnma_header.html"}>
+<legend><{$smarty.const._FNMA_SHOP_INFO}></legend>
+<{if $shop_items != FALSE}>
+	<{foreach from=$shop_items item=package}>
+	<form action="checkout.php" method="post">
+			<input type="hidden" name="op" value="step2">
+			<input type="hidden" name="id" value="<{$package.id}>">
+            <table cellpadding='3' cellspacing='0' width='100%'>
+				<tbody>
+					<tr> 
+						<td class='rankingHeader' align='center' colspan='3' nowrap='nowrap'>
+							<{$lang_shop_package}><{$package.id}> :: <font color='green'><{$package.desc}></font>
+						</td>
+					</tr>
+					<tr>
+						<td class='rankingHeader' align='center' nowrap='nowrap'><{$lang_reward}></td>
+						<td class='rankingHeader' align='center' nowrap='nowrap'><{$lang_cost}></td>
+						<td class='rankingHeader' align='center' nowrap='nowrap'><{$lang_action}>&nbsp;</td>
+					</tr>
+					<tr>
+						<td width='60%' class='serverStatus1' style='text-align: center;'><font size='-1'>
+							<{if $package.item_number != 0}>      
+									<a href='http://www.wowhead.com/?item=<{$package.item_number}>' target='_blank'><{$item_name}></a><br />
+							<{/if}>
+							<{if $package.itemset != 0}> 
+								<a href='http://www.wowhead.com/?itemset=<{$package.itemset}>' target='_blank'><{$lang_itemset}> <{$package.itemset}></a><br /> 
+							<{/if}>
+							<{if $package.gold != 0}> 
+								<font color='darkgreen'><b><{$lang_gold}></b>&nbsp;<{$print_gold}></font>
+                                <{/if}> 
+							</font>
+						</td>
+						<td class='serverStatus1' style='text-align: center; font-size: 12px;'>
+							<font color='darkred'><u><{$package.wp_cost}></u></font> <{$lang_web_points}><br />
+						</td>
+						<td class='serverStatus1' style='text-align: center;'><font size='-1'>
+							<input type="submit" value="<{$lang_btn_choose}>">
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			</form>
+            <br /><br />
+<{/foreach}>
+<{/if}>            

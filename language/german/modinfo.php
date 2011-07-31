@@ -24,6 +24,7 @@ define('_MI_FNMA_SMNAME5','Suchen');
 define('_MI_FNMA_SMNAME6','Anmelden');
 define('_MI_FNMA_SMNAME7','Abmelden');
 define('_MI_FNMA_SMNAME8','Memberarea');
+define('_MI_FNMA_SMNAME9', 'Shopitems');
 
 define('_MI_XFWA_BLOCK_SRVINFO_NAME','FireNetworks.de - MangosEmu');
 define('_MI_XFWA_BLOCK_SRVINFO_DESC','Blockbeschreibung');

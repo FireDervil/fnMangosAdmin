@@ -1,0 +1,64 @@
+<table width = "550" align="center">
+	<tr>
+		<td>
+        <form action="checkout.php" method="post">
+			<input type="hidden" name="op" value="checkout">
+			<input type="hidden" name="id" value="<{$package.id}>">
+				<table width="550" style="border-width: 1px; border-style: dotted; border-color: #928058;">
+					<tr>
+						<td>
+							<table width="545" style="border-width: 1px; border-style: solid; border-color: black;">
+							<tr>
+								<td>
+									<table border="0" cellspacing="0" cellpadding="4" width="540" align="center">
+                                    <tr>
+										<td align="center" valign="top" width="100%"><b><u><{$lang_recive_items}></u></b></td>
+									</tr>
+                                    <tr>
+										<td align="center" valign="top" width="100%">
+                                        <{if $package.item_number != 0}>      
+											<a href='http://www.wowhead.com/?item=<{$package.item_number}>' target='_blank'><{$item_name}></a><br />
+										<{/if}>
+										<{if $package.itemset != 0}> 
+											<a href='http://www.wowhead.com/?itemset=<{$package.itemset}>' target='_blank'><{$lang_itemset}> <{$package.itemset}></a><br /> 
+										<{/if}>
+										<{if $package.gold != 0}> 
+											<font color='darkgreen'><b><{$lang_gold}></b>&nbsp;<{$print_gold}></font>
+                                		<{/if}> 
+									</td>
+										</tr>
+										<tr>
+											<td align='center' valign = "top" width='100%'>
+												<br /><b><{$lang_select_char}></b><br /><br />
+                                                <select name='char'>
+															<{foreach from=$character_list item=char}>
+																<option value="<{$char.name}>"><{$char.name}></option>
+															<{/foreach}>
+													</select>
+											</td>
+										</tr>
+										
+										<tr>
+											<td align='center' valign = "top" width='100%'>
+												<br />
+                                                <b><{$lang_web_points_costs}></b>
+                                                <font color="darkred"><u><{$cost_package}></u></font>
+											</td>
+										</tr>
+										<tr>
+											<td align="center" valign="top" width="100%">
+												<br />
+                                                <input type="submit" name="order-now" value="<{$lang_btn_order_now}>" />
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</form>
+		</td>
+	</tr>
+</table>

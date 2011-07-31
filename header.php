@@ -41,6 +41,16 @@ if($fnmaDB["char"]->status() != 1)
 	die();
 }
 
+$fnmaDB["world"] = new MangosDatabase;
+$fnmaDB["world"]->connect($xoopsModuleConfig['mysql_host'], $xoopsModuleConfig['mysql_user'], $xoopsModuleConfig['mysql_passwd'], 'ytdbm', XOOPS_DB_CHARSET);
+// Check the database status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
+if($fnmaDB["world"]->status() != 1)
+{
+	echo "Cannot connect to the World database. Please make sure you have run the installer to properly set the DB info in the database.";
+	die();
+}
+
+
 $fnmaDB["sys"] = new MangosDatabase; 
 $fnmaDB["sys"]->connect(XOOPS_DB_HOST, XOOPS_DB_USER, XOOPS_DB_PASS, XOOPS_DB_NAME, XOOPS_DB_CHARSET);
 // Check the database status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
