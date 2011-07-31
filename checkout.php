@@ -94,9 +94,9 @@ function dofull_checkout($id, $sys = NULL)
 	//$send = $RA->send($command, $_SESSION['selected_realm']);
 	$fnSoap = new fnmaSOAPClient();
 	$fnSoap->SetCommandsList($commands);
-	$fnSoap->SetUsername('firemaker');
-	$fnSoap->SetPassword('s68m152sm$');
-	$fnSoap->SetUrl('http://85.214.249.174:27680/');
+	$fnSoap->SetUsername($xoopsModuleConfig['soap_consolen_name']);
+	$fnSoap->SetPassword($xoopsModuleConfig['soap_consolen_passwd']);
+	$fnSoap->SetUrl('http://'.$xoopsModuleConfig['server_ip'].':'.$xoopsModuleConfig['soap_consolen_port'].'/');
 
 	$system_sent = $fnSoap->SendCommand($command);
 

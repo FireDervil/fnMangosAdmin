@@ -1,5 +1,11 @@
 =>version 1.14 (FireDervil)
 --------------------
+- FIX: Template Datei
+- FIX: SOAP Checkout mit richtigen DB werten
+
+
+=>version 1.14 (FireDervil)
+--------------------
 - NEW: neune Menupunkt "Vote Shop" hinzugefügt
 - NEW: neue SOAP Klasse hinzugefügt (votesystem funktioniert derzeit nur mit SOAP!!!)
 - NEW: neue Templates für die Shop Bereich hinzugefügt
