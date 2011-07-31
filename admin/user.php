@@ -2,7 +2,6 @@
 
 include_once("header.php");
 
-
 $xoopsOption['pagetype'] = 'user';
 fnma_AdminLoadLanguage('user', 'fnMangosAdmin');
 

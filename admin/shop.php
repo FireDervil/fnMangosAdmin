@@ -2,13 +2,13 @@
 
 include_once("header.php");
 
+$xoopsOption['pagetype'] = 'shops';
+fnma_AdminLoadLanguage('shops', 'fnMangosAdmin');
+
 xoops_cp_header();
-
 global $xoopsModule;
-
 if (fnMangosAdmin_checkModuleAdmin()){
 $MangosAdmin = new ModuleAdmin();
-
 }
 $op = !empty($_GET['op'])? $_GET['op'] : (!empty($_POST['op'])?$_POST['op']:"default");
 
@@ -46,15 +46,15 @@ echo '<div class="content">
 		</div>				
 		<div class="main-content">
 			<form method="POST" action="shop.php?additem=true" class="form label-inline">
-				<h5><center>'._MD_FNMA_SHOPS_LISTSITEM.'</center></h5><br />
+				<h5><center>'._MA_FNMA_SHOPS_LISTSITEM.'</center></h5><br />
 				<table>
 					<thead>
-						<th><center><b>'._MD_FNMA_SHOPS_ID.'</b></center></th>
-						<th><center><b>'._MD_FNMA_SHOPS_REWARD.'</b></center></th>
-						<th><center><b>'._MD_FNMA_SHOPS_QUANTITY.'</b></center></th>
-						<th><center><b>'._MD_FNMA_SHOPS_COSTS.'</b></center></th>
-						<th><center><b>'._MD_FNMA_SHOPS_REALM.'</b></center></th>
-						<th><center><b>'._MD_FNMA_SHOPS_ACTION.'</b></center></th>
+						<th><center><b>'._MA_FNMA_SHOPS_ID.'</b></center></th>
+						<th><center><b>'._MA_FNMA_SHOPS_REWARD.'</b></center></th>
+						<th><center><b>'._MA_FNMA_SHOPS_QUANTITY.'</b></center></th>
+						<th><center><b>'._MA_FNMA_SHOPS_COSTS.'</b></center></th>
+						<th><center><b>'._MA_FNMA_SHOPS_REALM.'</b></center></th>
+						<th><center><b>'._MA_FNMA_SHOPS_ACTION.'</b></center></th>
 					</thead>';
 				
 					if($getitems != FALSE)
@@ -79,31 +79,30 @@ echo '<div class="content">
 									}
 									else
 									{
-										echo "No Item";
+										echo _MA_FNMA_NOT_ITEM;
 									}
 									if($row['itemset'] != 0) 
 									{ 
-										echo "<br /><a href='http://www.wowhead.com/?itemset=".$row['itemset']."' target='_blank'>ItemSet # ".$row['itemset']."</a>"; 
+										echo "<br /><a href='http://www.wowhead.com/?itemset=".$row['itemset']."' target='_blank'>"._MA_FNMA_ITESET." ".$row['itemset']."</a>"; 
 									}
 									if($row['gold'] != 0) 
 									{ 
-										echo "<br />Gold: "; print_gold($row['gold']); 
+										echo "<br />"._MA_FNMA_GOLD.": "; print_gold($row['gold']); 
 									}
-							echo"	</center></td>								
+							echo "</center></td>								
 									<td width='10%' align='center'>".$row['quanity']."</td>
 									<td width='10%' align='center'>".$row['wp_cost']."</a></td>
 									<td width='15%' align='center'>
 									";
 									if ($row['realms'] == 0) 
 									{ 
-										echo "All"; 
+										echo _MA_FNMA_ALL; 
 									}
 									else
 									{ 
 										echo $row['realms']; 
 									}
-							echo"
-									<td width='15%' align='center'><a href='shop.php?id=".$row['id']."'>Edit / Del</a></td>
+							echo "<td width='15%' align='center'><a href='shop.php?op=edit&id=".$row['id']."'>"._MA_FNMA_EDIT."</a> | <a href='shop.php?op=del&id=".$row['id']."'>"._MA_FNMA_DELETE."</a></td>
 									</td>
 								</tr>
 							";
@@ -115,13 +114,13 @@ echo '<div class="content">
 				// If there is going to be more then 1 page, then show page nav at the bottom
 					if($totalrows > $limit)
 					{
-						admin_paginate($totalrows, $limit, $page, '?p=admin&sub=shop');
+						admin_paginate($totalrows, $limit, $page, 'shop.php');
 					}
 				
 				echo' </div>
 			<br />
 			<div class="buttonrow-border">								
-				<center><button><span>'._MD_FNMA_SHOPS_ADD_PACKAGE.'</span></button></center>			
+				<center><button><span>'._MA_FNMA_SHOPS_ADD_PACKAGE.'</span></button></center>			
 			</div>
 			</form>
 		</div>
