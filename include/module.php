@@ -50,7 +50,7 @@ function xoops_module_install_fnMangosAdmin(&$module)
 		$q[] = "INSERT INTO ".$GLOBALS['xoopsDB']->prefix("fnma_account_groups")." VALUES ('3', 'Admin')";
 		$q[] = "INSERT INTO ".$GLOBALS['xoopsDB']->prefix("fnma_account_groups")." VALUES ('4', 'Super Admin')";
 		$q[] = "INSERT INTO ".$GLOBALS['xoopsDB']->prefix("fnma_account_groups")." VALUES ('5', 'Banned')";
-		$q[] = "INSERT INTO ".$GLOBALS['xoopsDB']->prefix("fnma_news")." VALUES ('1', 'Welcome!', '<center><b><p>Thank you for installing fnMangosAdmin!</p></b> <p>Please login with your Admin account username and password to configure the Global Functions further.</p></center>', 'FireDervil', '1288727884');";
+		$q[] = "INSERT INTO ".$GLOBALS['xoopsDB']->prefix("fnma_news")." (storyid, uid, title, created, published, expired, hostname, nohtml, nosmiley, hometext, bodytext, counter, topicid, ihome, notifypub, story_type, topicdisplay, topicalign, comments) VALUES ('1', 0, 'Thank you for installing fnMangosAdmin!', '1288727884', '1', '0', '127.0.0.1', '0', '0', 'fnMangosAdmin is a powerful utility to mangae and administer your player accounts on a mangos emulation system within the most popular xoops cms.', '', '10', '0', '0', '0', '0', '1', 'R', '')";
 		$q[] = "INSERT INTO ".$GLOBALS['xoopsDB']->prefix("fnma_account_extend")." ( account_id ) SELECT realmd.account.id FROM realmd.account";
 		
 		foreach($q as $query)

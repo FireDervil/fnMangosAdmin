@@ -78,12 +78,13 @@ define('_MD_FNMA_TOOL_CHANGE', 'Flag setzen');
 define('_MD_FNMA_TOOL_REINFO', 'Wenn Du dieses Flag setzten möchtest, <br />kannst du deinem Char beim nächsten Login ein neues Aussehen spendieren!');
 define('_MD_FNMA_TOOLS_ISASET', 'ERROR: 10201 - Flag ist bereits gesetzt!');
 define('_MD_FNMA_TOOL_COSTS', 'Dieser Service wird dich <b>%d </b>deiner Webpoints kosten!');
-define('', '');
-define('', '');
-define('', '');
+
 
 
 /*
+define('', '');
+define('', '');
+define('', '');
 define('', '');
 define('', '');
 */

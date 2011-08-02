@@ -1,3 +1,9 @@
+=>version 1.17 (FireDervil)
+--------------------
+- NEW: Register Template Datei
+- FIX: Register Function
+- FIX: Revisionnumber from prev commit
+
 =>version 1.16 (FireDervil)
 --------------------
 - FIX: Register Template Datei

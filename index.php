@@ -1,12 +1,14 @@
 <?php
 
-include 'header.php';
-include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'include' . DS . 'functions.mangos.php';
+include_once("header.php");
+
 include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'class' . DS . 'stories.php';
 
 xoops_loadLanguage('main', 'fnMangosAdmin');
 $xoopsModuleConfig['displaynav'] = 1;
 $xoopsModuleConfig['storyhome'] = 5;
+
+
 
 $xoopsOption['template_main']= 'fnma_index.html';
 include XOOPS_ROOT_PATH."/header.php";

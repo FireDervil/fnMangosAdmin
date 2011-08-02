@@ -9,8 +9,8 @@ define('_FNMA_INTARTICLE', '');
 define('_FNMA_INTARTFOUND', '');
 define('_FNMA_PRINTER_FRIENDLY', 'Druckerfreundliche Seite');
 define('_FNMA_SEND_NEWS', 'News schrieben');
-define('_POSTED_BY', 'geschrieben von: ');
-define('_READS', 'gelesen');
+define('_FNMA_POSTED_BY', 'geschrieben von: ');
+define('_FNMA_READS', 'gelesen');
 /*
 define('', '');
 define('', '');

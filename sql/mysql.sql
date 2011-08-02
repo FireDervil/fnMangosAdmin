@@ -82,16 +82,39 @@ CREATE TABLE `fnma_online` (
   `logged` int(10) NOT NULL DEFAULT '0',
   `currenturl` varchar(255) NOT NULL DEFAULT './',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=826 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
 
 CREATE TABLE `fnma_news` (
-  `id` smallint(3) NOT NULL AUTO_INCREMENT,
-  `title` text,
-  `message` longtext,
-  `posted_by` text,
-  `post_time` int(15) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+  `storyid` int(8) unsigned NOT NULL AUTO_INCREMENT,
+  `uid` int(5) unsigned NOT NULL DEFAULT '0',
+  `title` varchar(255) NOT NULL DEFAULT '',
+  `created` int(10) NOT NULL DEFAULT '0',
+  `published` int(10) NOT NULL DEFAULT '0',
+  `expired` int(10) NOT NULL DEFAULT '0',
+  `hostname` varchar(20) NOT NULL DEFAULT '',
+  `nohtml` tinyint(5) NOT NULL DEFAULT '0',
+  `nosmile` tinyint(5) NOT NULL DEFAULT '0',
+  `hometext` text NOT NULL,
+  `bodytext` text NOT NULL,
+  `counter` int(8) NOT NULL DEFAULT '0',
+  `topicid` smallint(4) NOT NULL DEFAULT '1',
+  `ihome` tinyint(1) NOT NULL DEFAULT '0',
+  `notifypub` tinyint(1) NOT NULL DEFAULT '0',
+  `storie_type` varchar(5) NOT NULL DEFAULT '',
+  `topicsdisplay` tinyint(1) NOT NULL DEFAULT '0',
+  `topicsalgin` char(1) NOT NULL DEFAULT 'R',
+  `comments` smallint(5) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`storyid`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+CREATE TABLE fnma_news_topics (
+  `topic_id` smallint(4) unsigned NOT NULL AUTO_INCREMENT,
+  `topic_pid` smallint(4) unsigned NOT NULL DEFAULT '0',
+  `topic_imgurl` varchar(20) NOT NULL DEFAULT '',
+  `topic_title` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`topic_id`),
+  KEY `pid` (`topic_pid`) USING BTREE
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 CREATE TABLE `fnma_shop_items` (
   `id` smallint(3) NOT NULL AUTO_INCREMENT,

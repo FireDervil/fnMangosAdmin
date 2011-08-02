@@ -6,7 +6,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 
 $modversion["name"] = _MI_FNMA_MANAGER_NAME;
-$modversion["version"] = '1.16';
+$modversion["version"] = '1.17'; 
 $modversion["description"] = _MI_FNMA_MANAGER_DESC;
 $modversion["image"] = "images/logo/fnMangosAdmin_logo.png";
 $modversion["dirname"] = "fnMangosAdmin";
@@ -414,6 +414,18 @@ $modversion['config'][$i] = array(
 	'default'     => '1'
 );
 $i++;
+
+// added rev:1.17 
+$modversion['config'][$i] = array(
+	'name'        => 'do_debug',
+	'title'       => '_MI_FNMA_DO_DEBUG',
+	'description' => '_MI_FNMA_DO_DEBUG_DESC',
+	'formtype'    => 'yesno',
+	'valuetype'   => 'int',
+	'default'     => '1'
+);
+$i++;
+
 
 // Blocks
 $i = 1;

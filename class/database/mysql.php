@@ -270,14 +270,26 @@ class MangosDatabase //MySQL
 		return mysql_result($sql, 0);
     }
 
-  function start_transaction()
-  {
-    return;
-  }
+	public function start_transaction()
+	{
+		return;
+	}
 
-  function end_transaction()
-  {
-    return;
-  }
+	public function end_transaction()
+	{
+		return;
+	}
+  
+	public function setErrors($err_no, $err_str)
+    {
+        $this->_errors[$err_no] = trim($err_str);
+    }
+
+
+	public function getErrors()
+    {
+        return $this->_errors;
+    }
+	
 }
 ?>
