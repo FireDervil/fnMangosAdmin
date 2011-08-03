@@ -1,21 +1,13 @@
 <?php
 
 include 'header.php';
-include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'include' . DS . 'functions.mangos.php';
-include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'class' . DS . 'captcha' . DS .'fncaptcha.php';
+include_once(FNMA_ROOT_PATH . 'class' . DS . 'captcha' . DS .'fncaptcha.php');
 
 xoops_loadLanguage('user', 'fnMangosAdmin');
 
 $op = 'form';
 foreach ( $_POST as $k => $v ) { ${$k} = $v; }
 foreach ( $_GET as $k => $v ) { ${$k} = $v; }
-
-// defines
-$xoopsModuleConfig['max_act_per_ip'] = 10;
-$xoopsModuleConfig['use_user_activate'] = true;
-$xoopsModuleConfig['reg_act_imgvar'] = true;
-$xoopsModuleConfig['reg_secret_questions'] = false;
-
 
 switch ($op) {
 case "cancel":
@@ -26,17 +18,14 @@ case "cancel":
 case "register":
 
 	// Define that users can register (for error reporting)
-	// TODO: THIS MUST IN ModuleConfig
-	$allow_reg = true;
-	$reg_act_imgvar = false;
-	$reg_secret_questions = false;
+	global $fnmaConfig, $fnmaModule;
 	
 	// Init the error array
 	$err_array = array();
-	
+
 	
 	// Check to see if we still are allowed to register
-	if($allow_reg == true)
+	if($fnmaConfig['allow_global_reg'] == '1')
 	{
 		// Inizialize variable, we use this after. Use this to add extensions.
 		$notreturn = false;
@@ -47,7 +36,7 @@ case "register":
 
 		// Ext 1 - Image verification
 		// We need to see if its enabled, and if the user put in the right code
-		if($xoopsModuleConfig['reg_act_imgvar'] == true)
+		if($fnmaConfig['reg_with_captcha'] == '1')
 		{
 			$image_key = $_POST['image_key'];
 			$filename = mysql_real_escape_string($_POST['filename_image']);
@@ -68,7 +57,7 @@ case "register":
 		
 		// Ext 2 - secret questions
 		// Check if user questions are required, if so we need to check for symbols, and character lenght
-		if ($xoopsModuleConfig['reg_secret_questions'] == true)
+		if ($fnmaConfig['reg_secret_quest'] == '1')
 		{
 			if ($_POST['secretq1'] && $_POST['secretq2'] && $_POST['secreta1'] && $_POST['secreta2']) 
 			{
@@ -197,7 +186,6 @@ default:
 
 
 	$xoopsOption['template_main'] = 'fnma_register_form_realm.html';
-
 	
 	include XOOPS_ROOT_PATH."/header.php";
 	$xoopsOption['xoops_module_header']= $xoops_module_header;
@@ -230,10 +218,7 @@ default:
 		"lang_noproblem" => _MD_FNMA_REG_NO_PROBLEM,
 		"lang_notregister" => _MD_FNMA_NOT_REGSITER,
 		"lang_reg_secret" => _MD_FNMA_REG_SECRET)
-		);
-								
-		
-		
+		);		
 		
 	include XOOPS_ROOT_PATH."/footer.php";
 	break;

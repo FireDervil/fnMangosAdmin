@@ -1,8 +1,22 @@
+=>version 1.18 (FireDervil)
+--------------------
+- NEW: viele der festen Konfiguration wurden nun mit v1.18 in die Konfiguration übernommen
+- NEW: neue GLOBALES verteilt im System
+- NEW: Sprachdefinition erweitert
+- FIX: Datenbankeintrag geändert
+- BUG: Registercheck geändert auf Echtheitsprüfung, return Wert der aktivierung stand zuvor auf FALSE
+- BUG: noch einige kleinere Kosmetische fehler behoben
+- FIX: ERROR CODES um [ERROR 10901]: erweitert; Fehler der internen GLOBALS nutzung
+
 =>version 1.17 (FireDervil)
 --------------------
-- NEW: Register Template Datei
-- FIX: Register Function
-- FIX: Revisionnumber from prev commit
+- NEW: neues klassen system eingebaut umd ie interne xoops obect klasse nun direkt bedienen zu können
+- NEW: verzueichnisbaum geändert, alle internen aufrufe werden nun aus einem neuen datei zweig heraus gesteuert
+- FIX: mysql eintrag der alten news wurden entfernt und durch die neue db struktur ersetzt
+- FIX: mysql eintrag in xoops_version ergänzt, da der topics eintrag fehlte
+- CHG: der wechsel auf ein internes konfigurationssystem hat begonnen
+- CHG: wechwel auf eigene notation im quellcode hat begonnen und ist abschließend xoops unabhängig
+- BUG: ein register eintrag wurde behoben. dieser fehler fürte dazu das die registrierung keine mail verschickte
 
 =>version 1.16 (FireDervil)
 --------------------

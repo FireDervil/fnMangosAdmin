@@ -88,4 +88,34 @@ define('_MI_FNMA_ALLOW_CHG_ADDON_DESC', 'Erlaubt es Benutzern das Addon im Profi
 
 define('_MI_FNMA_ALLOW_REG', 'Registrierung erlauben');
 define('_MI_FNMA_ALLOW_REG_DESC', 'Schaltet die Regsiterseite zum Realm AN oder AUS');
+define('_MI_FNMA_CHECK_V_ISONLINE', 'Voteseiten Status');
+define('_MI_FNMA_CHECK_V_ISONLINE_DESC', 'Prüft ob die Voteseite online ist oder nicht');
+define('_MI_FNMA_ACTIV_VOTESYS', 'Votesystem aktivieren');
+define('_MI_FNMA_ACTIV_VOTESYS_DESC', 'Aktivert das Votesystem');
+define('_MI_FNMA_ALLOW_GLOBAL_REG', 'Registrierung aktivieren / deaktivieren');
+define('_MI_FNMA_ALLOW_GLOBAL_REG_DESC', 'Schlatet die Registrierung auf dem Realm an oder aus');
+define('_MI_FNMA_REG_WITH_ACCSECRET', 'Sicherheitsfragen anschlaten / abschlaten');
+define('_MI_FNMA_REG_WITH_ACCSECRET_DESC', 'Aktiviert oder Deaktiviert die Sicherheitsfragen');
+define('_MI_FNMA_REG_WITH_CAPTCHA', 'Registrierung mit Captcha');
+define('_MI_FNMA_REG_WITH_CAPTCHA_DESC', 'Aktiviert / Deaktiviert die Captcha abfrage wärend der Registrierung.');
+define('_MI_FNMA_USER_MUST_ACTIV', 'Benutzer muss Konto freischalten');
+define('_MI_FNMA_USER_MUST_ACTIV_DESC', 'Aktiviert oder deaktiviert die Benutzerfreischlatung via Req.Key');
+define('_MI_FNMA_MAX_ACCT_PER_IP', 'Max. Accounts per Realm');
+define('_MI_FNMA_MAX_ACCT_PER_IP_DESC', 'Maximale Anzahl an Accounts auf dem Realm.');
+define('_MI_FNMA_CHAR_CPOINTS', 'Web-Punkte für das Char- Redesignen');
+define('_MI_FNMA_CHAR_CPOINTS_DESC', 'Wieviel Punkte muss der USer für das Redesignen seines Chars bezahlen');
+define('_MFI_FNMA_ACTIVE_CHR_CUST', 'Char-Redesign aktivieren');
+define('_MFI_FNMA_ACTIVE_CHR_CUST_DESC', 'Aktiviert / Deaktiviert das Char-Redesign');
+define('_MI_FNMA_CHAR_RENAME_AKTIV', 'Charrename aktivieren');
+define('_MI_FNMA_CHAR_RENAME_AKTIV_DESC', 'Aktiviert oder Deaktiviert das Umbennen des Chars');
+define('_MI_FNMA_CHAR_RENAME_POINTS', 'Punkte für Charrename');
+define('_MI_FNMA_CHAR_RENAME_POINTS_DESC', 'Wieviele Punkte muss ein Benutzer ausgeben um seinen Char umbennenen zu können.');
+define('_MI_FNMA_CHGNAME_ACTIVE', 'Feate Changename abschlaten');
+define('_MI_FNMA_CHGNAME_ACTIVE_DESC', 'Schaltet das Changename Feature ab');
+define('_MI_FNMA_SYS_DEFAULT', 'Standard');
+define('_MI_FNMA_SYS_SOAP', 'SOAP');
+define('_MI_FNMA_SYS_RC', 'RA');
+define('_MI_FNMA_SYS_SOCKET', 'Socket Server');
+define('_MI_FNMA_SEND_SYSTEM', 'internes Versandtsystem wählen');
+define('_MI_FNMA_SEND_SYSTEM_DESC', 'Stellt das intern unterstützte Versandtsystem ein.');
 ?>

@@ -44,6 +44,8 @@ include_once(FNMA_ROOT_PATH . "class" . DS . "votes.php");
 include_once(FNMA_ROOT_PATH . "class" . DS . "realms.php");
 include_once(FNMA_ROOT_PATH . "class" . DS . "stories.php");
 include_once(FNMA_ROOT_PATH . "class" . DS . "account" . DS . "account.php");
+include_once(FNMA_ROOT_PATH . "class" . DS . "characters" . DS . "chars.php");
+include_once(FNMA_ROOT_PATH . "include" . DS . "defines.php");
 
 // Creating the shops handler object
 $fnma_shop_handler =& xoops_getmodulehandler('shops', FNMA_DIRNAME);
@@ -54,11 +56,11 @@ $fnma_shop_handler =& xoops_getmodulehandler('shops', FNMA_DIRNAME);
 //$fnma_realms_handler =& xoops_getmodulehandler('realms', FNMA_DIRNAME);
 
 // Creating the votes handler object
-//$fnma_votes_handler =& xoops_getmodulehandler('votes', FNMA_DIRNAME);
+$fnma_votes_handler =& xoops_getmodulehandler('votes', FNMA_DIRNAME);
 
 // Creating the stories handler object
 //$fnma_stories_handler =& xoops_getmodulehandler('stories', FNMA_DIRNAME);
-//dev($fnma_stories_handler);
+
 
 // settings for the error functions
 ini_set('log_errors', TRUE);
@@ -83,8 +85,8 @@ $fnmaDB["logon"]->connect($fnmaConfig['mysql_host'], $fnmaConfig['mysql_user'], 
 // Check the database status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
 if($fnmaDB["logon"]->status() != 1)
 {
-	echo "Cannot connect to the Realm database. Please make sure you have run the installer to properly set the DB info in the database.";
-	die();
+	redirect_header(XOOPS_URL. "index.php", 4, _FNMA_DB_REALM_ERROR);
+	exit(0);
 }
 
 $fnmaDB["char"] = new MangosDatabase;
@@ -92,8 +94,8 @@ $fnmaDB["char"]->connect($fnmaConfig['mysql_host'], $fnmaConfig['mysql_user'], $
 // Check the database status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
 if($fnmaDB["char"]->status() != 1)
 {
-	echo "Cannot connect to the Realm database. Please make sure you have run the installer to properly set the DB info in the database.";
-	die();
+	redirect_header(XOOPS_URL. "index.php", 4, _FNMA_DB_CHAR_ERROR);
+	exit(0);
 }
 
 $fnmaDB["world"] = new MangosDatabase;
@@ -101,8 +103,8 @@ $fnmaDB["world"]->connect($fnmaConfig['mysql_host'], $fnmaConfig['mysql_user'], 
 // Check the database status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
 if($fnmaDB["world"]->status() != 1)
 {
-	echo "Cannot connect to the World database. Please make sure you have run the installer to properly set the DB info in the database.";
-	die();
+	redirect_header(XOOPS_URL. "index.php", 4, _FNMA_DB_WORLD_ERROR);
+	exit(0);
 }
 
 $fnmaDB["sys"] = new MangosDatabase; 
@@ -110,8 +112,8 @@ $fnmaDB["sys"]->connect(XOOPS_DB_HOST, XOOPS_DB_USER, XOOPS_DB_PASS, XOOPS_DB_NA
 // Check the database status. 0 = cannot connect, 1 = success, 2 = DB doesnt exist
 if($fnmaDB["sys"]->status() != 1)
 {
-	echo "Cannot connect to the Realm database. Please make sure you have run the installer to properly set the DB info in the database.";
-	die();
+	redirect_header(XOOPS_URL. "index.php", 4, _FNMA_DB_INTERNAL_ERROR);
+	exit(0);
 }
 
 // include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'class' . DS . 'fn_account.php';
@@ -120,8 +122,5 @@ include_once XOOPS_ROOT_PATH . "Frameworks". DS . "art". DS . "functions.php";
 $myts =& MyTextSanitizer::getInstance();
 
 $fnmaAccount = new fnmaAccount();
-
-
-
 
 ?>

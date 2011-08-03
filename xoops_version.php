@@ -6,7 +6,7 @@ if (!defined('XOOPS_ROOT_PATH')) {
 
 
 $modversion["name"] = _MI_FNMA_MANAGER_NAME;
-$modversion["version"] = '1.17'; 
+$modversion["version"] = '1.18'; 
 $modversion["description"] = _MI_FNMA_MANAGER_DESC;
 $modversion["image"] = "images/logo/fnMangosAdmin_logo.png";
 $modversion["dirname"] = "fnMangosAdmin";
@@ -420,6 +420,143 @@ $modversion['config'][$i] = array(
 	'name'        => 'do_debug',
 	'title'       => '_MI_FNMA_DO_DEBUG',
 	'description' => '_MI_FNMA_DO_DEBUG_DESC',
+	'formtype'    => 'yesno',
+	'valuetype'   => 'int',
+	'default'     => '1'
+);
+$i++;
+
+// added Rev: 1.18
+$modversion['config'][$i] = array(
+	'name'        => 'send_system',
+	'title'       => '_MI_FNMA_SEND_SYSTEM',
+	'description' => '_MI_FNMA_SEND_SYSTEM_DESC',
+	'formtype'    => 'select',
+	'valuetype'   => 'text',
+	"options"	  =>  array(
+					_MI_FNMA_SYS_DEFAULT  => 'default',	// default => socket
+					_MI_FNMA_SYS_SOAP  => 'soap',		// soap	
+					_MI_FNMA_SYS_RC => 'rpc',		// rc
+					_MI_FNMA_SYS_SOCKET	 => 'stream'	// socket
+					),
+	"default" 	  => "default"
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'is_active_chgname',
+	'title'       => '_MI_FNMA_CHGNAME_ACTIVE',
+	'description' => '_MI_FNMA_CHGNAME_ACTIVE_DESC',
+	'formtype'    => 'yesno',
+	'valuetype'   => 'int',
+	'default'     => '1'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'char_rename_pts',
+	'title'       => '_MI_FNMA_CHAR_RENAME_POINTS',
+	'description' => '_MI_FNMA_CHAR_RENAME_POINTS_DESC',
+	'formtype'    => 'textbox',
+	'valuetype'   => 'int',
+	'default'     => '5'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'char_rename',
+	'title'       => '_MI_FNMA_CHAR_RENAME_AKTIV',
+	'description' => '_MI_FNMA_CHAR_RENAME_AKTIV_DESC',
+	'formtype'    => 'yesno',
+	'valuetype'   => 'int',
+	'default'     => '1'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'char_customize',
+	'title'       => '_MFI_FNMA_ACTIVE_CHR_CUST',
+	'description' => '_MI_FNMA_ACTIVE_CHR_CUST_DESC',
+	'formtype'    => 'yesno',
+	'valuetype'   => 'int',
+	'default'     => '1'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'char_customize_pnt',
+	'title'       => '_MI_FNMA_CHAR_CPOINTS',
+	'description' => '_MI_FNMA_CHAR_CPOINTS_DESC',
+	'formtype'    => 'textbox',
+	'valuetype'   => 'int',
+	'default'     => '5'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'max_acct_per_ip',
+	'title'       => '_MI_FNMA_MAX_ACCT_PER_IP',
+	'description' => '_MI_FNMA_MAX_ACCT_PER_IP_DESC',
+	'formtype'    => 'textbox',
+	'valuetype'   => 'int',
+	'default'     => '10'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'user_must_activate',
+	'title'       => '_MI_FNMA_USER_MUST_ACTIV',
+	'description' => '_MI_FNMA_USER_MUST_ACTIV_DESC',
+	'formtype'    => 'yesno',
+	'valuetype'   => 'int',
+	'default'     => '0'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'reg_with_captcha',
+	'title'       => '_MI_FNMA_REG_WITH_CAPTCHA',
+	'description' => '_MI_FNMA_REG_WITH_CAPTCHA_DESC',
+	'formtype'    => 'yesno',
+	'valuetype'   => 'int',
+	'default'     => '1'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'reg_secret_quest',
+	'title'       => '_MI_FNMA_REG_WITH_ACCSECRET',
+	'description' => '_MI_FNMA_REG_WITH_ACCSECRET_DESC',
+	'formtype'    => 'yesno',
+	'valuetype'   => 'int',
+	'default'     => '0'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'allow_global_reg',
+	'title'       => '_MI_FNMA_ALLOW_GLOBAL_REG',
+	'description' => '_MI_FNMA_ALLOW_GLOBAL_REG_DESC',
+	'formtype'    => 'yesno',
+	'valuetype'   => 'int',
+	'default'     => '1'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'active_vote_system',
+	'title'       => '_MI_FNMA_ACTIV_VOTESYS',
+	'description' => '_MI_FNMA_ACTIV_VOTESYS_DESC',
+	'formtype'    => 'yesno',
+	'valuetype'   => 'int',
+	'default'     => '1'
+);
+$i++;
+
+$modversion['config'][$i] = array(
+	'name'        => 'check_vote_isonline',
+	'title'       => '_MI_FNMA_CHECK_V_ISONLINE',
+	'description' => '_MI_FNMA_CHECK_V_ISONLINE_DESC',
 	'formtype'    => 'yesno',
 	'valuetype'   => 'int',
 	'default'     => '1'

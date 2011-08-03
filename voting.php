@@ -4,11 +4,7 @@ include dirname(__FILE__) . DIRECTORY_SEPARATOR . 'header.php';
 
 xoops_loadLanguage('misc', 'fnMangosAdmin');
 
-include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'class' . DS . 'characters' . DS . 'chars.php';
-
-// TODO: goes in xoopsConfig
-$xoopsModuleConfig['module_vote_onlinecheck'] = 1;
-$xoopsModulConfig['module_vote_system'] = 1;
+$user = $fnmaAccount->getProfile($_SESSION['fnmaUserId']);
 
 // If the user is not loggedin, redirect
 if (empty($_SESSION['fnmaUserId'])) {
@@ -17,7 +13,7 @@ if (empty($_SESSION['fnmaUserId'])) {
 }
 
 // If the vote system is disabled, redirect
-if($xoopsModulConfig['module_vote_system'] == 0)
+if($fnmaConfig['active_vote_system'] == 0)
 {
     redirect_header('member.php',1, _MD_FNMA_MDOULE_VOTE_NOTACT);
 }
@@ -34,7 +30,7 @@ $vote_sites = $fnmaDB["sys"]->select("SELECT * FROM ".$xoopsDB->prefix('fnma_vot
 
 function initUser()
 {
-	global $vote_sites, $fnmaDB, $xoopsDB, $fnmaUser;
+	global $vote_sites, $fnmaConfig, $fnmaModule, $fnmaDB, $xoopsDB, $fnmaUser;
 	
 	$return = array();
 
@@ -107,9 +103,6 @@ $Voted = $Voting[$key]['voted'];
 $reset = $Voting[$key]['reset'];
 }
 
-global $fnmaAccount;
-$user = $fnmaAccount->getProfile($_SESSION['fnmaUserId']);
-
 
 $op = 'main';
 
@@ -123,8 +116,9 @@ switch($op)
 {
 	
 	case'vote':
-	global $xoopsModuleConfig, $fnmaDB, $xoopsDB, $fnmaUser;
-	$site = $_POST['site'];
+	
+	global $fnmaConfig, $fnmaDB, $xoopsDB, $fnmaUser;
+	$site = intval($_POST['site']);
 	$tab_sites = $fnmaDB["sys"]->selectRow("SELECT * FROM ".$xoopsDB->prefix('fnma_vote_sites')." WHERE id=".$site."");
 	
 	// First we check to see the users hasnt clicked vote twice
@@ -137,7 +131,7 @@ switch($op)
 	}else{
 		if($tab_sites != FALSE)
 		{
-			if($xoopsModuleConfig['module_vote_onlinecheck'] == 1)
+			if($fnmaConfig['check_vote_isonline'] == 1)
 			{
 				$fp = @fsockopen($tab_sites['hostname'], 80, $errno, $errstr, 3);
 			} else {
@@ -146,7 +140,7 @@ switch($op)
 			
 			if($fp)
 			{
-				if($xoopsModuleConfig['module_vote_onlinecheck'] == 1)
+				if($fnmaConfig['check_vote_isonline'] == 1)
 				{
 					fclose($fp);
 				}

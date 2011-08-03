@@ -1,12 +1,11 @@
 <?php
 
 include('header.php');
-include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'include' . DS . 'defines.php';
-include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'include' . DS . 'functions.soap.php';
-include_once XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'class' . DS . 'sockets' . DS. 'socket.soap.php';
+include_once(FNMA_ROOT_PATH . 'include' . DS . 'functions.soap.php');
+include_once(FNMA_ROOT_PATH . 'class' . DS . 'sockets' . DS. 'socket.soap.php');
 
 xoops_loadLanguage('shop', 'fnMangosAdmin');
-
+dev($fnmaModule);
 $xoopsOption['template_main']= 'fnma_shop_checkout.html';
 include XOOPS_ROOT_PATH."/header.php";
 $xoTheme->addScript('modules/'.$xoopsModule->getVar("dirname").'/js/tooltip.js', null, '' );
@@ -16,9 +15,6 @@ $package = $fnmaDB["sys"]->selectRow("SELECT * FROM ".$xoopsDB->prefix('fnma_sho
 $character_list = $fnmaAccount->getCharacterList($_SESSION['fnmaUserId']);
 $fnmaUser = $fnmaAccount->getProfile($_SESSION['fnmaUserId']);
 	
-// TODO: 
-// pre var, put this back in xoopsConfig after checking
-$xoopsModuleConfig['send_system'] = '1'; // possible option 1 = SOAP, 2 = RA, 3 = SOCKET (=>experimental)
 
 $op = 'default';
 foreach ( $_POST as $k => $v ) { ${$k} = $v; }
@@ -89,17 +85,27 @@ function dofull_checkout($id, $sys = NULL)
 		$command = "send money ".$_POST['char']." \""._FNMA_SHOP_INGAME_MAILSUBJECT."\" \"".
 			_FNMA_SHOP_INGAME_MESSAGE."\" ".$package['gold'];
 	}
-	
-	// === Send the command to the RA Class === //
-	//$send = $RA->send($command, $_SESSION['selected_realm']);
-	$fnSoap = new fnmaSOAPClient();
-	$fnSoap->SetCommandsList($commands);
-	$fnSoap->SetUsername($xoopsModuleConfig['soap_consolen_name']);
-	$fnSoap->SetPassword($xoopsModuleConfig['soap_consolen_passwd']);
-	$fnSoap->SetUrl('http://'.$xoopsModuleConfig['server_ip'].':'.$xoopsModuleConfig['soap_consolen_port'].'/');
+	if($sys == 'soap')
+	{
+		// === Send the command to the RA Class === //
+		//$send = $RA->send($command, $_SESSION['selected_realm']);
+		$fnSoap = new fnmaSOAPClient();
+		$fnSoap->SetCommandsList($commands);
+		$fnSoap->SetUsername($fnmaConfig['soap_consolen_name']);
+		$fnSoap->SetPassword($fnmaConfig['soap_consolen_passwd']);
+		$fnSoap->SetUrl('http://'.$fnmaConfig['server_ip'].':'.$fnmaConfig['soap_consolen_port'].'/');
 
-	$system_sent = $fnSoap->SendCommand($command);
-
+		$system_sent = $fnSoap->SendCommand($command);
+	} elseif($sys == 'rpc')
+		{
+			// here comes the rc call
+		
+		} elseif($sys == 'stream')
+			{
+				// here comes the socket call
+			}
+				
+						
 	// Catch the result of send. If its a 1 or 2, then the send wasnt successful
 	if(is_numeric($system_sent))
 	{
@@ -148,7 +154,7 @@ switch($op)
 {
 	
 	case 'checkout':
-		$sys = $xoopsModuleConfig['send_system'];
+		$sys = $fnmaConfig['send_system'];
 		dofull_checkout($id, $sys);
 	exit();
 	break;

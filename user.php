@@ -81,9 +81,5 @@ if ($op == 'logout') {
     redirect_header('index.php', 1, $message);
     exit();
 }
-	
-	
-	
-
 
 ?>
